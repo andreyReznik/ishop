@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <import resource="classpath:/beans/persistent/persistent-context.xml"/>
+    <bean id="watchDao"
+          class="ua.sourceit.ishop.persistent.dao.WatchDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="dictionaryDao"
+          class="ua.sourceit.ishop.persistent.dao.DictionaryDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean id="imageDao"
+          class="ua.sourceit.ishop.persistent.dao.ImageDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="amountedPropertyDao"
+          class="ua.sourceit.ishop.persistent.dao.AmountedPropertyDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+
+
+
+</beans>
