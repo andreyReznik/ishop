@@ -1,0 +1,152 @@
+/*DO NOT EDIT COMMENTS IN THIS FILE*/
+/*BEGIN PROD2*/
+.MB_PROD2 .MB_PRODUCTSLOT {
+    width: 200px;
+    min-height: 320px;
+    margin: 0px 0px 45px 0px;
+}
+
+.MB_PROD2 .MB_PRODUCTIMAGE {
+    display: block;
+    margin: auto;
+}
+
+.MB_PROD2 .MB_PRODUCTBRANDLINK {
+    color: #000001;
+    font-weight: 600;
+    font-family: 'proxima-nova-n6', 'proxima-nova', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.MB_PROD2 .MB_PRODUCTNAMELINK {
+    color: #000000;
+    font-weight: 400;
+    font-family: 'proxima-nova-n4', 'proxima-nova', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.MB_PROD2 .MB_PRODUCTNOTDISCOUNTEDPRICEWRAPPER {
+    display: table-cell;
+    width: 60px;
+    padding: 8px 0px 0px 0px;
+    text-align: left;
+    line-height: 1;
+    float: left;
+}
+
+.MB_PROD2 .MB_PRODUCTPRICELINK {
+    color: #333d4d;
+    font-weight: 600;
+    font-family: 'proxima-nova', sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.MB_PROD2 .MB_PRODUCTDISCOUNTEDPRICEWRAPPER {
+    width: 200px;
+    display: table-cell;
+    text-align: left;
+    line-height: 1;
+    float: left;
+}
+
+.MB_PROD2 .MB_PRODUCTBASEPRICELINK {
+    width: 55px;
+    color: #A0A3A8;
+    font-style: normal;
+    font-weight: 400;
+    font-family: 'proxima-nova', sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.MB_PROD2 .MB_PRODUCTBASEPRICE {
+    text-decoration: line-through;
+}
+
+.MB_PROD2 .MB_PRODUCTSALEPRICELINK {
+    color: #333d4d;
+    font-weight: 600;
+    font-family: 'proxima-nova', sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.MB_PROD2 .MB_STY0 {
+    padding: 0px 0px 10px 0px;
+    font-family: 'proxima-nova-n6', 'proxima-nova', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.MB_PROD2 .MB_STY1 {
+    display: table-cell;
+    vertical-align: middle;
+    width: 200px;
+    height: 175px;
+}
+
+.MB_PROD2 .MB_STY2 {
+    width: 200px;
+    padding: 20px 0px 0px 0px;
+    text-align: left;
+    line-height: 1;
+}
+
+.MB_PROD2 .MB_STY3 {
+    width: 200px;
+    height: auto;
+    min-height: 48px;
+    padding: 4px 0px 5px 0px;
+    word-wrap: break-word;
+    text-align: left;
+    line-height: 1;
+}
+
+.MB_PROD2 .MB_STY4 {
+    diplay: table-cell;
+    width: 55px;
+    padding: 8px 0px 0px 0px;
+    float: left;
+}
+
+.MB_PROD2 .MB_STY5 {
+    display: inline-block;
+    width: 60px;
+    padding: 8px 0px 0px 5px;
+    float: left;
+}
+
+.MB_PROD2 .MB_STY6 {
+    width: 70px;
+    display: table-cell;
+    float: left;
+    padding: 5px 0px 0px 0px;
+}
+
+.MB_PROD2 .MB_STY7 {
+    display: inline-block;
+    float: left;
+    background-color: #9C0C0C;
+    font-family: 'proxima-nova', san-serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 11px;
+    color: #ffffff;
+    padding: 4px 7px 2px;
+}
+
+/*END PROD2*/
+

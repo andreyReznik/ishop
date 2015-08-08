@@ -1,10 +1,9 @@
 package ua.sourceit.ishop.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.sourceit.ishop.model.Watch;
-import ua.sourceit.ishop.persistent.dao.WatchDao;
-import ua.sourceit.ishop.persistent.exception.DaoSystemException;
-import ua.sourceit.ishop.persistent.exception.NoSuchEntityException;
-import ua.sourceit.ishop.services.exception.ServiceException;
+import ua.sourceit.ishop.persistent.dao.watch.WatchDao;
 
 import java.util.List;
 
@@ -12,30 +11,22 @@ import java.util.List;
  * @author: areznik
  */
 
+@Service("productService")
 class ProductServiceImpl implements ProductService {
 
+
+    @Autowired
     private WatchDao watchDao;
 
-    private ProductServiceImpl(WatchDao watchDao) {
-        this.watchDao = watchDao;
-    }
 
     @Override
     public List<Watch> getWatchesByRange(int min, int count) {
-        try {
-            return watchDao.getByRange(min, count);
-        } catch (DaoSystemException e) {
-            throw new ServiceException(e.getMessage(),e);
-        }
+          return watchDao.getByRange(min, count);
     }
 
     @Override
-    public Watch getWatchById(int id) throws NoSuchEntityException {
-        try {
-            return watchDao.getById(id);
-        } catch (DaoSystemException e) {
-            throw new ServiceException(e.getMessage(),e);
-        }
+    public Watch getWatchById(int id) {
+           return watchDao.getById(id);
     }
 
 

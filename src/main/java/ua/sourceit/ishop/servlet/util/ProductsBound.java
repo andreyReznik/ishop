@@ -2,6 +2,7 @@ package ua.sourceit.ishop.servlet.util;
 
 /**
  * Class for getting product bounds (limit and offset) while requesting list of product
+ *
  * @author: areznik
  */
 

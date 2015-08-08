@@ -2,6 +2,7 @@ package ua.sourceit.ishop.model;
 
 /**
  * User role
+ *
  * @author: areznik
  */
 

@@ -14,16 +14,16 @@ public class Watch extends Thing {
     private String brand;
     private String model;
     private String info;
-    private float  price;
+    private float price;
     private String details;
     private String gender;
     private String movement;
     private String mainImage;
-    private List<WatchImage> bigSmallImages;
+    private List<WatchImage> watchImages;
 
 
     public Watch() {
-        bigSmallImages = new LinkedList<>();
+        watchImages = new LinkedList<>();
     }
 
     public String getBrand() {
@@ -90,15 +90,13 @@ public class Watch extends Thing {
         this.mainImage = mainImage;
     }
 
-    public void addWatchImage(WatchImage watchImage){
-        if (watchImage != null){
-            this.bigSmallImages.add(watchImage);
-        }
+
+    public List<WatchImage> getWatchImages() {
+        return watchImages;
     }
 
-    public List<WatchImage> getWatchImages(){
-        return bigSmallImages;
+    public void setWatchImages(List<WatchImage> watchImages) {
+        this.watchImages = watchImages;
     }
-
 }
 

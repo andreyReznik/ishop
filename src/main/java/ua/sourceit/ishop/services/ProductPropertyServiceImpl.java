@@ -1,9 +1,9 @@
 package ua.sourceit.ishop.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.sourceit.ishop.model.prop.AmountedProperty;
-import ua.sourceit.ishop.persistent.dao.AmountedPropertyDao;
-import ua.sourceit.ishop.persistent.exception.DaoSystemException;
-import ua.sourceit.ishop.services.exception.ServiceException;
+import ua.sourceit.ishop.persistent.dao.amountedProperty.AmountedPropertyDao;
 
 import java.util.List;
 
@@ -11,49 +11,32 @@ import java.util.List;
  * @author: areznik
  */
 
+@Service("productPropertyService")
 public class ProductPropertyServiceImpl implements ProductPropertyService {
 
-    private AmountedPropertyDao amountedPropertyDao;
 
-    public ProductPropertyServiceImpl(AmountedPropertyDao amountedPropertyDao) {
-        this.amountedPropertyDao = amountedPropertyDao;
-    }
+    @Autowired
+    private AmountedPropertyDao amountedPropertyDao;
 
     @Override
     public List<AmountedProperty> getGendersAmount() {
-        try {
-            return amountedPropertyDao.getGendersAmount();
-        } catch (DaoSystemException e) {
-            throw new ServiceException(e.getMessage(),e);
-        }
+        return amountedPropertyDao.getGendersAmount();
     }
 
     @Override
     public List<AmountedProperty> getMovementAmount() {
-        try {
-            return amountedPropertyDao.getMovementAmount();
-        } catch (DaoSystemException e) {
-            throw new ServiceException(e.getMessage(),e);
-        }
+        return amountedPropertyDao.getMovementAmount();
     }
 
 
     @Override
     public List<AmountedProperty> getPriceGroupAmount() {
-            try {
-                return amountedPropertyDao.getPriceGroupAmount();
-            } catch (DaoSystemException e) {
-                throw new ServiceException(e.getMessage(),e);
-            }
+        return amountedPropertyDao.getPriceGroupAmount();
     }
 
     @Override
     public List<AmountedProperty> getBrandsAmount() {
-        try {
-            return amountedPropertyDao.getBrandAmount();
-        } catch (DaoSystemException e) {
-            throw new ServiceException(e.getMessage(),e);
-        }
+        return amountedPropertyDao.getBrandAmount();
     }
 
 

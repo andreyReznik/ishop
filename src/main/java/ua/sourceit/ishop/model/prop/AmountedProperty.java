@@ -22,6 +22,7 @@ public class AmountedProperty {
         return id;
     }
 
+
     public int getAmount() {
         return amount;
     }
