@@ -27,13 +27,12 @@ public class ProductDetailServlet extends InjectableHttpServlet {
 
         int id = RequestParameterUtil.getProductId(request.getParameter("id"));
 
-        Watch watch = null;
-        try {
-            watch = productService.getWatchById(id);
+        Watch watch = productService.getWatchById(id);
+        if (watch != null){
             request.setAttribute("watch", watch);
             request.setAttribute("images", watch.getWatchImages());
             request.getRequestDispatcher("/WEB-INF/jsp/product.jsp").forward(request, response);
-        } catch (NullPointerException e) {
+        } else {
             request.getRequestDispatcher("/WEB-INF/jsp/noEntity.jsp").forward(request, response);
         }
     }

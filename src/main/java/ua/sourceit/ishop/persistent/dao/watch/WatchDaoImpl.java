@@ -1,6 +1,5 @@
 package ua.sourceit.ishop.persistent.dao.watch;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -9,9 +8,6 @@ import org.springframework.stereotype.Repository;
 import ua.sourceit.ishop.model.Watch;
 import ua.sourceit.ishop.persistent.dao.AbstractDao;
 import ua.sourceit.ishop.persistent.dao.JdbcUtil;
-import ua.sourceit.ishop.persistent.dao.dictionary.DictionaryDao;
-import ua.sourceit.ishop.persistent.dao.dictionary.DictionaryDaoImpl;
-import ua.sourceit.ishop.persistent.dao.image.ImageDao;
 
 import java.sql.*;
 import java.util.List;
@@ -44,39 +40,22 @@ public class WatchDaoImpl extends AbstractDao implements WatchDao, RowMapper<Wat
             " details, id_gender, id_movement, imageLink, created, active )" +
             " values (?,?,?,?,?,?,?,?,?,?)";
 
-    @Autowired
-    private ImageDao imageDao;
+
 
     @Override
     public List<Watch> getByRange(int offset, int limit){
-
         String formattedSql = String.format(GET_BY_RANGE_SQL, limit, offset);
-
         return getJdbcTemplate().query(formattedSql, this);
-
     }
 
 
     @Override
     public Watch getById(int id){
-
-        Watch watch = getJdbcTemplate().queryForObject(GET_BY_ID_SQL, new Object[]{id}, this);
-
-        if (watch != null) {
-            watch.setWatchImages(imageDao.getProductImages(id));
-        }
-
-        return watch;
+        return getJdbcTemplate().queryForObject(GET_BY_ID_SQL, new Object[]{id}, this);
     }
 
     @Override
-    public void addNew(final Watch watch) {
-
-        DictionaryDao dictionaryDao = new DictionaryDaoImpl();
-        final int brandId = dictionaryDao.getDictionaryId(watch.getBrand(), "brand");
-        final int genderId = dictionaryDao.getDictionaryId(watch.getGender(), "gender");
-        final int movementId = dictionaryDao.getDictionaryId(watch.getMovement(), "movement");
-
+    public int addNew(final Watch watch,final int brandId,final int genderId,final int movementId) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         getJdbcTemplate().update(
                 new PreparedStatementCreator() {
@@ -88,11 +67,7 @@ public class WatchDaoImpl extends AbstractDao implements WatchDao, RowMapper<Wat
                     }
                 },
                 keyHolder);
-
-        int productId = keyHolder.getKey().intValue();
-
-        imageDao.insertBatch(productId, watch.getWatchImages());
-
+        return keyHolder.getKey().intValue();
     }
 
     private void fillParameters(final Watch watch, final int brandId, final int genderId, final int movementId, final PreparedStatement preparedStatement) throws SQLException {
@@ -125,8 +100,5 @@ public class WatchDaoImpl extends AbstractDao implements WatchDao, RowMapper<Wat
         return watch;
     }
 
-    public void setImageDao(ImageDao imageDao) {
-        this.imageDao = imageDao;
-    }
 
 }

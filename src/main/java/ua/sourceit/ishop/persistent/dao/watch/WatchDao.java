@@ -17,6 +17,6 @@ public interface WatchDao {
 
     public Watch getById(int id);
 
-    public void addNew(Watch watch);
+    public int addNew(Watch watch, int brandId, int genderId, int movementId);
 
 }

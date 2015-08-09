@@ -1,5 +1,7 @@
 package ua.sourceit.ishop.servlet.filter;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
 import java.io.IOException;
 
@@ -10,6 +12,9 @@ import java.io.IOException;
  */
 
 public class ExceptionFilter implements Filter {
+
+    private static final Logger LOGGER = Logger.getLogger(ExceptionFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -20,7 +25,7 @@ public class ExceptionFilter implements Filter {
         try {
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Throwable ex) {
-            ex.printStackTrace();
+            LOGGER.error("Detected error during processing request: " + ex.getMessage(), ex);
             servletRequest.setAttribute("message", ex.getMessage());
             Throwable cause = ex.getCause();
             if (cause != null) {

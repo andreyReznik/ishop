@@ -14773,7 +14773,7 @@ div.selector.disabled, div.selector.disabled.active {
 }
 
 div.selector.disabled span, div.selector.disabled.active span {
-    background: url("http://cdn1.jomashop.com/skin/frontend/enterprise/joma/images/sprite_uniform.png") no-repeat scroll 100% 13px # FFFFFF;
+    background: url("http://cdn1.jomashop.com/skin/frontend/enterprise/joma/images/sprite_uniform.png") no-repeat scroll 100% 13px #FFFFFF;
 }
 
 div.checker {
@@ -18036,8 +18036,8 @@ li#remember-me-box.control .link-tip {
 
     .my-account-pages .block-content select.tinynav {
         -moz-appearance: none !important;
-        text-indent: 0.01px;
-        text-overflow: '';
+        text-indent: 0px;
+        text-overflow: ellipsis;
         -webkit-appearance: none;
         background: url("http://cdn1.jomashop.com/skin/frontend/enterprise/joma/images/sprite_uniform.png") no-repeat scroll 100% 13px #FFFFFF !important;
         color: #2B3036;

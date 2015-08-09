@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Watch extends Thing {
 
+    private int id;
     private String brand;
     private String model;
     private String info;
@@ -90,13 +91,37 @@ public class Watch extends Thing {
         this.mainImage = mainImage;
     }
 
-
     public List<WatchImage> getWatchImages() {
         return watchImages;
     }
 
     public void setWatchImages(List<WatchImage> watchImages) {
         this.watchImages = watchImages;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Watch watch = (Watch) o;
+
+        if (id != watch.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
 

@@ -15,7 +15,6 @@ import java.sql.SQLFeatureNotSupportedException;
 
 import static org.apache.log4j.Logger.getLogger;
 
-
 /**
  * Adapter between org.apache.commons.dbcp.BasicDataSource
  * and  javax.sql.DataSource interface
