@@ -1,6 +1,6 @@
-package ua.sourceit.ishop.services;
+package ua.sourceit.ishop.service;
 
-import ua.sourceit.ishop.model.Watch;
+import ua.sourceit.ishop.entity.Watch;
 
 import java.util.List;
 
@@ -15,4 +15,5 @@ public interface ProductService {
     public Watch getWatchById(int id);
 
     public void addNewWatch(Watch watch);
+
 }

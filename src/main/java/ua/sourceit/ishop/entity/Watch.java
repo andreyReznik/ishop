@@ -1,4 +1,4 @@
-package ua.sourceit.ishop.model;
+package ua.sourceit.ishop.entity;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -123,5 +123,6 @@ public class Watch extends Thing {
     public int hashCode() {
         return id;
     }
+
 }
 

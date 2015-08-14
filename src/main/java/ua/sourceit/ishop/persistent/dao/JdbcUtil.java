@@ -1,6 +1,6 @@
 package ua.sourceit.ishop.persistent.dao;
 
-import ua.sourceit.ishop.model.Thing;
+import ua.sourceit.ishop.entity.Thing;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package ua.sourceit.ishop.model;
+package ua.sourceit.ishop.entity;
 
 /**
  * Images for our product

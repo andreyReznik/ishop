@@ -2,7 +2,7 @@ package ua.sourceit.ishop.persistent.dao.image;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ua.sourceit.ishop.model.WatchImage;
+import ua.sourceit.ishop.entity.WatchImage;
 import ua.sourceit.ishop.persistent.dao.AbstractDao;
 import ua.sourceit.ishop.persistent.dao.JdbcUtil;
 

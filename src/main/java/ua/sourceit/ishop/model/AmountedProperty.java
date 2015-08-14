@@ -1,4 +1,4 @@
-package ua.sourceit.ishop.model.prop;
+package ua.sourceit.ishop.model;
 
 /**
  * Product property that need amount.

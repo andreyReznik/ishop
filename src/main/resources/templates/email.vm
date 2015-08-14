@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <h3>Thank you for your order!</h3>
+
+        <div>
+            <a>Your order number is $order.id</a>.
+        </div>
+        <ul>
+            #foreach ($entry in $order.watchList.entrySet())
+            <li>$entry.key.info ($entry.value))</li>
+        </ul>
+        #end
+        <div>
+            <a>Total price: $total</a>.
+        </div>
+    </body>
+</html>

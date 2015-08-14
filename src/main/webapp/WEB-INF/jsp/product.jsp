@@ -790,8 +790,8 @@
                 <div class="price-shipping-info">
                     <div class="pdp-final-price">
                         <p class="final-price">
-                            <span><fmt:setLocale value="en_US"/>
-                    <fmt:formatNumber value="${watch.price}"
+                            <span><fmt:setLocale value="en_US" scope="session"/>
+                    <fmt:formatNumber value="${watch.price} "
                                       type="currency"/></span>
 
 
@@ -806,9 +806,7 @@
                 <div class="add-to-cart">
 
                     <input name="qty" id="qty" maxlength="12" value="0" type="hidden">
-                    <%--<button class="button" type="button" onclick="productAddToCartForm.submit(this)"><span><span class="btn btn-5 btn-5a">Buy Now</span></span></button>--%>
-                    <button class="button" type="button" onclick="alert('Not implemented yet!')"><span><span
-                            class="btn btn-5 btn-5a">Buy Now</span></span></button>
+                    <button class="button" type="button" onclick="productAddToCartForm.submit(this,'/product/cart/add/${watch.id}')"><span><span class="btn btn-5 btn-5a">Buy Now</span></span></button>
                 </div>
 
             </div>
@@ -1057,6 +1055,7 @@
 <div class="clearer"></div>
 </div>
 <script type="text/javascript">
+
 //<![CDATA[
 var productAddToCartForm = new VarienForm('product_addtocart_form');
 productAddToCartForm.submit = function (button, url) {
@@ -1068,7 +1067,7 @@ productAddToCartForm.submit = function (button, url) {
         }
         var e = null;
         if (!url) {
-            url = ',/product/84779/form_key/<esi:include src="" />/';
+            url = ',/product/notImp/<esi:include src="" />/';
         }
         try {
             if (button.hasClassName('update-cart')) {
@@ -1097,7 +1096,8 @@ productAddToCartForm.submit = function (button, url) {
                                 jQuery('.top-cart').replaceWith(data.sidebar);
                                 Enterprise.TopCart.initialize('topCartContent');
                             }
-                            var popup = '<div id="pdp-success-popup" class="jom-popup"><h3>Added to your Bag!</h3><p>' + data.message + '</p><ul class="popup-buttons-list"><li><a href="/product/notImpl" class="popup-cart-button popup-buttons">View My Bag</a></li><li><a onclick="continueshop()" class="popup-shop-button popup-buttons">Continue Shopping</a></li></ul></div>';
+                            var popup = '<div id="pdp-success-popup" class="jom-popup"><h3>Added to your Bag!</h3><p>' + data.message + '</p><ul class="popup-buttons-list"><li>' +
+                                    '<a href="/product/cart/view" class="popup-cart-button popup-buttons">View My Bag</a></li><li><a onclick="continueshop()" class="popup-shop-button popup-buttons">Continue Shopping</a></li></ul></div>';
                             if (jQuery('.giftcard-form').length > 0) {
                                 jQuery('.giftcard-form input#giftcard_amount_input, .giftcard-form input#giftcard_recipient_name, .giftcard-form input#giftcard_recipient_email, .giftcard-form textarea#giftcard_message').val("");
                             }
@@ -1449,12 +1449,9 @@ productAddToCartForm.submitLight = function (button, url) {
         }
     }
 </script>
-
-
 <script type="application/ld+json">
 
 </script>
-</div>
-</div>
+
 
 

@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!-- ESI END DUMMY COMMENT [] -->
 <div id="turpentine-esi-block-fcf536a99a02c5279350c4de39d2c5f2d98b01d56b511a35776d0059aff04c04" style=""></div>
 <div class="main col1-layout">
@@ -692,18 +691,18 @@
         <c:forEach items="${watches}" var="watch">
             <li class="item simple-config" id="product-${watch.id}">
                 <div class="product-image-wrapper">
-                    <a href="/product/view/?id=${watch.id}" title="" class="product-image"><img
+                    <a href="/product/view/${watch.id}" title="" class="product-image"><img
                             src="${watch.mainImage}"
                             alt=""></a>
                 </div>
                 <div class="product-info">
                     <h2 class="product-name">
-                        <a href="/product/view/?id=${watch.id}" title="">
+                        <a href="/product/view/${watch.id}" title="">
                             <span class="manufacturer">${watch.brand}</span>
                                 ${watch.info} </a>
 
                     </h2>
-                    <a href="/product/view/?id=${watch.id}" title="" class="price-link">
+                    <a href="/product/view/${watch.id}" title="" class="price-link">
 
 
                         <div class="price-box">
@@ -711,7 +710,7 @@
 
                             <p class="special-price">
                 <span class="price" id="product-price-${watch.id}">
-                    <fmt:setLocale value="en_US"/>
+                    <fmt:setLocale value="en_US" scope="session"/>
                     <fmt:formatNumber value="${watch.price}"
                                       type="currency"/>                </span>
                             </p>

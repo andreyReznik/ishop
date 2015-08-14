@@ -1,4 +1,6 @@
-package ua.sourceit.ishop.model;
+package ua.sourceit.ishop.entity;
+
+import ua.sourceit.ishop.controller.util.PriceUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +41,11 @@ public class Order {
         return watchList;
     }
 
-    public void addWatch(Watch watch, int count) {
-        if (watchList.containsKey(watch)) {
-            Integer current = watchList.get(watch);
-            watchList.put(watch, current + count);
-        } else {
-            watchList.put(watch, count);
-        }
+    public void setWatchList(Map<Watch, Integer> watchList) {
+        this.watchList = watchList;
+    }
+
+    public float calcTotalPrice(){
+        return PriceUtil.calcTotalPrice(watchList);
     }
 }

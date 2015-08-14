@@ -1,6 +1,6 @@
-package ua.sourceit.ishop.services;
+package ua.sourceit.ishop.service;
 
-import ua.sourceit.ishop.model.prop.AmountedProperty;
+import ua.sourceit.ishop.model.AmountedProperty;
 
 import java.util.List;
 

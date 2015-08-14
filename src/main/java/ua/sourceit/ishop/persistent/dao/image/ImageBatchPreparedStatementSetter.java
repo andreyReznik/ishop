@@ -1,7 +1,7 @@
 package ua.sourceit.ishop.persistent.dao.image;
 
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import ua.sourceit.ishop.model.WatchImage;
+import ua.sourceit.ishop.entity.WatchImage;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

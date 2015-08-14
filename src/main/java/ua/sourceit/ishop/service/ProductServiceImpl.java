@@ -1,10 +1,9 @@
-package ua.sourceit.ishop.services;
+package ua.sourceit.ishop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.sourceit.ishop.model.Watch;
+import ua.sourceit.ishop.entity.Watch;
 import ua.sourceit.ishop.persistent.dao.dictionary.DictionaryDao;
-import ua.sourceit.ishop.persistent.dao.dictionary.DictionaryDaoImpl;
 import ua.sourceit.ishop.persistent.dao.image.ImageDao;
 import ua.sourceit.ishop.persistent.dao.watch.WatchDao;
 

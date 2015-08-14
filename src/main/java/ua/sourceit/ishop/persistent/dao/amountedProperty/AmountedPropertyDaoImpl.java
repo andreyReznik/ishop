@@ -2,7 +2,7 @@ package ua.sourceit.ishop.persistent.dao.amountedProperty;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ua.sourceit.ishop.model.prop.AmountedProperty;
+import ua.sourceit.ishop.model.AmountedProperty;
 import ua.sourceit.ishop.persistent.dao.AbstractDao;
 
 import java.sql.ResultSet;

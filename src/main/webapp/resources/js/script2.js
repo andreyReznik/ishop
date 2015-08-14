@@ -16955,6 +16955,7 @@ Enterprise.TopCart = {
             this.interval = null;
         }
         $(this.elementHeader).removeClassName('expanded');
+        this.container.style.display = "none";
     }
 };
 Enterprise.TopMyAccountLinks = {

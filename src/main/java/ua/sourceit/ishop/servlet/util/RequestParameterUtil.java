@@ -1,7 +1,5 @@
 package ua.sourceit.ishop.servlet.util;
 
-import ua.sourceit.ishop.services.exception.InvalidRequestParameterException;
-
 /**
  * Work with request parameters
  *
@@ -59,13 +57,4 @@ public class RequestParameterUtil {
 
     }
 
-    public static int getProductId(String id) {
-        int intValue;
-        try {
-            intValue = Integer.parseInt(id);
-        } catch (NumberFormatException ex) {
-            throw new InvalidRequestParameterException("Parameter " + id + " empty or not valid!", ex);
-        }
-        return intValue;
-    }
 }

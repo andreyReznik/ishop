@@ -1,6 +1,6 @@
 package ua.sourceit.ishop.persistent.dao.watch;
 
-import ua.sourceit.ishop.model.Watch;
+import ua.sourceit.ishop.entity.Watch;
 
 
 import java.util.List;

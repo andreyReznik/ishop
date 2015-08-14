@@ -1,6 +1,6 @@
 package ua.sourceit.ishop.persistent.dao.image;
 
-import ua.sourceit.ishop.model.WatchImage;
+import ua.sourceit.ishop.entity.WatchImage;
 
 import java.util.List;
 

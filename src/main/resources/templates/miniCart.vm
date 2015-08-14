@@ -1,0 +1,50 @@
+<div class="top-cart">
+    <div class="block-title">
+        <strong id="cartHeader">My Shopping Bag <span><span class="no-margin no-padding no-display-device">(</span>$cartCount<span class="no-margin no-padding no-display-device">)</span></span></strong>
+    </div>
+    <div id="topCartContent" class="block-content" style="display:none">
+        <div class="inner-wrapper">                            <p class="block-subtitle">
+            <span onclick="Enterprise.TopCart.hideCart()" class="close-btn">Close</span>
+        </p>
+            <ol id="mini-cart" class="mini-products-list">
+                #foreach ($mapEntry in $watchList.entrySet())
+                <li class="item last odd">
+                    <a href="/product/view/$mapEntry.key.id" title="$mapEntry.key.info" class="product-image"><img src="$mapEntry.key.watchImages[0].smallImage" alt="$mapEntry.key.info"></a>
+                    <div class="product-details">
+                        <p class="product-name">
+                            <a class="second_link" href="/product/view/$mapEntry.key.id" title="$mapEntry.key.info">$mapEntry.key.info</a>
+                        </p>
+                        <div class="mini-cart-pro-details">
+                            <div class="mini-cart-qty"><span>Qty:</span>$mapEntry.value</div>
+##                            <div class="mini-cart-price"><span class="price">$number.format('#,###.00',$mapEntry.key.price)</span></div>
+                            <div class="mini-cart-price"><span class="price">$mapEntry.key.price</span></div>
+                        </div><table cellpadding="0">
+                        <tbody><tr>
+
+                        </tr>
+                        </tbody></table>
+                        <div class="mini-cart-bottom">
+##                            <a href="http://www.jomashop.com/checkout/cart/configure/id/1534649/" title="Edit item" class="btn-edit">Edit</a>
+                            <a href="/product/cart/delete/$mapEntry.key.id" onclick="return confirm('Are you sure you would like to remove this item from the shopping cart?');" title="Remove item" class="btn-remove">Remove</a>
+                        </div>
+                    </div>
+                </li>
+                #end
+            </ol>
+            <script type="text/javascript">decorateList('mini-cart', 'none-recursive')</script>
+            <div class="actions">
+                <button class="button" type="button" onclick="setLocation('/product/cart/view')">
+                    <span>
+                        <span class="btn btn-4 btn-4a">Go to Shopping Bag</span>
+                    </span>
+                </button>
+##                <a href="/cart/view" class="mini-cart-bag"><span>Go to Shopping Bag</span></a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        Enterprise.TopCart.initialize('topCartContent');
+        // Below can be used to show minicart after item added
+        // Enterprise.TopCart.showCart(7);
+    </script>
+</div>
