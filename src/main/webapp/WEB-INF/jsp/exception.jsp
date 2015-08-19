@@ -1,13 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div>
 <h3>Ooops. Some exception occured!</h3>
-
-<div>${message}</div>
-<div>${cause}</div>
-<a href="/product/all/">back</a>
-</body>
-</html>
+<!--
+    Failed URL: ${url}
+    Exception:  ${exception.message}
+        <c:forEach items="${exception.stackTrace}" var="ste">    ${ste}
+    </c:forEach>
+    -->
+    <a href="/product/all/">back</a>
+</div>

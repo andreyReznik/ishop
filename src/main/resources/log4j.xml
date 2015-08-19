@@ -28,6 +28,10 @@
         <level value="ERROR" />
     </logger>
 
+    <logger name="javax.mail">
+        <level value="ERROR" />
+    </logger>
+
     <root>
         <priority value="INFO"/>
         <appender-ref ref="ASYNC"/>

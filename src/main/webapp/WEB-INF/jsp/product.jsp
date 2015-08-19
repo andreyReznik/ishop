@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="main col1-layout">
@@ -20,62 +21,6 @@
 <script type="text/javascript">
     /* related products on page */
 </script>
-<div id="login-modal" class=" jom-popup mfp-hide ">
-    <p style="display:none;" class="jqError"></p>
-
-    <form action="/product/notImpl/" method="post" id="login-form-main">
-        <div class="col2">
-
-            <h3>Log In</h3>
-
-            <div id="wishlist-cnt"></div>
-            <ul>
-                <li>
-                    <label for="email" class="required">Email Address:<em>*</em></label>
-
-                    <div class="input-box">
-                        <input name="login[username]" id="login-email"
-                               class="input-text required-entry required-entry-login-email validate-email"
-                               title="Email Address" placeholder="Email Address" type="email">
-                    </div>
-                </li>
-                <li>
-                    <label for="pass" class="required">Password:<em>*</em> <a class="jqForgotPassword"
-                                                                              href="#forgotPassword-modal">Forgot your
-                        password?</a></label>
-
-                    <div class="input-box">
-                        <input name="login[password]"
-                               class="input-text required-entry required-entry-login-password validate-password"
-                               id="login-pass" title="Password" placeholder="Password" type="password">
-                    </div>
-                </li>
-
-                <li id="remember-me-box" class="control">
-                    <div class="input-box">
-                        <div id="uniform-remember_mewK6BedOwDv" class="checker"><span class="checked"><input
-                                name="persistent_remember_me" class="checkbox" id="remember_mewK6BedOwDv"
-                                checked="checked" title="Remember Me" type="checkbox"></span></div>
-                    </div>
-                    <label for="remember_mewK6BedOwDv">Remember Me</label>
-                    <a class="link-tip" href="#">(What's this?)</a>
-                </li>
-
-            </ul>
-            <!--<div class="login-hr"></div>-->
-
-            <button type="submit" class="button jqLoginSubmit"><span><span>LOG IN</span></span></button>
-
-
-            <div class="button-box ">
-                <a class="jqRegister" href="#register-modal">CREATE ACCOUNT</a>
-            </div>
-        </div>
-
-    </form>
-    <a title="Log In" id="login" href="#login-modal" class="jqLogin" style="display:none">Log In</a>
-
-</div>
 <script type="text/javascript">
     //<![CDATA[
     var showTooltip = function () {
@@ -121,7 +66,7 @@
                 beforeOpen: function () {
                     jQuery('#login-modal').find('.jqError').html('');
                     jQuery('#login-modal').find('.jqError').hide();
-                },
+                }
             }
         });	//for forgot password
         jQuery('.JQLogin').magnificPopup({
@@ -131,7 +76,7 @@
                 beforeOpen: function () {
                     jQuery('#login-modal').find('.jqError').html('');
                     jQuery('#login-modal').find('.jqError').hide();
-                },
+                }
             }
         });	//for pdp wishlist
         jQuery('.jqLogin').click(function () {
@@ -213,52 +158,6 @@
     //]]>
 </script>
 
-<div class="jom-popup mfp-hide" id="register-modal">
-    <p style="display:none;" class="jqError"></p>
-
-    <form action="/product/notImpl/" method="post" id="form-register" enctype="multipart/form-data">
-        <div class="col2">
-            <input autocomplete="off" name="success_url" value="" type="hidden">
-            <input autocomplete="off" name="error_url" value="" type="hidden">
-
-            <h2>CREATE AN ACCOUNT</h2>
-            <ul>
-                <li>
-                    <label for="email" class="required">Email Address:<em>*</em></label>
-
-                    <div class="input-box">
-                        <input autocomplete="off" data-default="Email Address" name="email" id="email_address"
-                               title="Email Address"
-                               class="input-text required-entry required-entry-login-email validate-email"
-                               placeholder="Email Address" type="email">
-                    </div>
-                </li>
-                <li>
-                    <label for="pass" class="required">Password:<em>*</em></label>
-
-                    <div class="field">
-                        <div class="input-box">
-                            <!-- <input type="text" id="rplaceholder" class="input-text required-entry-register-password validate-password" value="" onfocus="setRegisterPass();" placeholder="Password" />-->
-                            <input autocomplete="off" name="password" id="register-password" title="Password"
-                                   class="input-text required-entry required-entry-register-password validate-password"
-                                   placeholder="Password" type="password">
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="hr"></div>
-            <div>
-                <button autocomplete="off" type="submit" class="button jqRegisterSubmit jqLoginSubmit"
-                        title="CREATE ACCOUNT"><span><span>CREATE ACCOUNT</span></span></button>
-                <p class="already-registered"><a href="#login-modal" class="jqLogin jqRegister">Already A Member? Log
-                    In</a></p>
-            </div>
-        </div>
-
-        <a href="#followup-modal" class="followup-modal" style="display:none;"></a>
-        <a class="jqRegister" href="#register-modal" style="display:none;">CREATE ACCOUNT</a>
-    </form>
-</div>
 <script type="text/javascript">
     //<![CDATA[
     jQuery(document).ready(function () {
@@ -332,36 +231,6 @@
 
     //]]>
 </script>
-<div id="forgotPassword-modal" class="jom-popup mfp-hide">
-    <p style="display:none;" class="jqError"></p>
-
-    <p style="display:none;" class="jqsuccesmsg"></p>
-
-    <div>
-        <h2>Forgot Password?</h2>
-    </div>
-    <form action="/product/notImpl/" method="post" id="form-password">
-        <div>
-            <p>Please enter your email address below. You will recieve a link to reset your password.</p>
-            <ul>
-                <li>
-                    <label for="email" class="required">Email Address:<em>*</em></label>
-
-                    <div class="input-box">
-                        <input name="email" data-default="Email Address" alt="email" id="forgot_email"
-                               class="input-text required-entry required-entry-login-email validate-email"
-                               placeholder="Email Address" type="email">
-                    </div>
-                    <div class="btnSet">
-                        <button type="submit" title="Send Mail" class="button btnStyle_2 jqLoginSubmit"><span><span>SEND MAIL</span></span>
-                        </button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </form>
-    <p class="back-link"><a title="Log In" id="login" href="#login-modal" class="jqLogin">&lt; Back</a></p>
-</div>
 <script type="text/javascript">
     //<![CDATA[
     jQuery(document).ready(function () {
@@ -419,55 +288,6 @@
     });
     //]]>
 </script>
-<div class="jom-popup mfp-hide" id="followup-modal">
-    <p style="color:red;display:none;" class="jqError"></p>
-
-    <form action="/product/notImpl/" method="post" id="form-follow" enctype="multipart/form-data">
-        <div class="col2">
-            <h2>CREATE AN ACCOUNT</h2>
-            <ul class="input-section">
-                <li>
-                    <label for="email" class="">What do we call you?</label>
-
-                    <div class="input-box">
-                        <input data-default="First Name" class="input-text required-entry-followup-firstname"
-                               maxlength="255" title="First Name" name="firstname" id="followFirstName"
-                               autocomplete="off" placeholder="Name" type="text">
-                    </div>
-                </li>
-                <!--    <li>
-                         <label for="email" class=""></label>
-                         <div class="input-box">
-                             <input type="text" data-default="Customer Question" name="customer_question" value="" title="" id="customer_question" class="input-text required-entry-followup-customerquestion" placeholder="Response" />
-                         </div> -->
-
-
-                <li class="control">
-                    <div class="input-box">
-                        <div id="uniform-is_subscribed" class="checker"><span class="checked"><input autocomplete="off"
-                                                                                                     name="is_subscribed"
-                                                                                                     title="Sign Up for Newsletter"
-                                                                                                     value="1"
-                                                                                                     id="is_subscribed"
-                                                                                                     checked="checked"
-                                                                                                     class="checkbox"
-                                                                                                     type="checkbox"></span>
-                        </div>
-                    </div>
-                    <label for="is_subscribed">Sign Me Up For Deals</label>
-                </li>
-
-            </ul>
-            <div class="button-section">
-                <button autocomplete="off" type="submit" class="button jqFollowSubmit jqLoginSubmit" title="SAVE"><span><span>SAVE</span></span>
-                </button>
-            </div>
-        </div>
-    </form>
-    <div class="skip">
-        <a href="/product/notImpl/">No thanks, I don’t want to fill this out now.</a>
-    </div>
-</div>
 <script type="text/javascript">
     //<![CDATA[
     jQuery(document).ready(function () {
@@ -478,7 +298,7 @@
                 beforeOpen: function () {
                     jQuery('#followup-modal').find('.jqError').html('');
                     jQuery('#followup-modal').find('.jqError').hide();
-                },
+                }
             }
         });
     });
@@ -556,15 +376,16 @@
         <a href="javascript:;" id="jqZooomImgNext" class="corraZoomNav next">Next</a>
         <!-- MOVING HINT BELOW IMAGE - HINT SETTING IN MAGICZOOM ADMIN NEEDS TO BE DISABLED  <div class="click-to-enlarge"><a style="cursor:text">CLICK IMAGE TO ENLARGE</a></div> -->
         <div id="MagicToolboxSelectors71545" class="MagicToolboxSelectorsContainer" style="margin-top: 15px">
-            <c:forEach items="${images}" var="image">
+            <c:forEach var="image" items="${watch.watchImages}">
                 <a
-                        onclick="magicToolboxOnChangeSelector(this);"
-                        href="${image.bigImage}"
-                        rel="zoom-id:MagicZoomPlusImage71545;caption-source:a:title;zoom-width:578px;zoom-height:490px;zoom-distance:50;expand-effect:linear;expand-speed:200;restore-speed:200;smoothing-speed:50;pan-zoom:false;preload-selectors-big:true;selectors-effect:false;selectors-effect-speed:300;selectors-mouseover-delay:500;caption-position:left;buttons-display:close;hint-position:bl;hint-opacity:100;"
-                        rev="${image.bigImage}"
-                        class="MagicThumb-swap" style="outline: none; display: inline-block;"><img
-                        src="${image.smallImage}"
-                        alt="${watch.info} img1"></a>
+                    onclick="magicToolboxOnChangeSelector(this);"
+                    href="${image.bigImage}"
+                    rel="zoom-id:MagicZoomPlusImage71545;caption-source:a:title;zoom-width:578px;zoom-height:490px;zoom-distance:50;expand-effect:linear;expand-speed:200;restore-speed:200;smoothing-speed:50;pan-zoom:false;preload-selectors-big:true;selectors-effect:false;selectors-effect-speed:300;selectors-mouseover-delay:500;caption-position:left;buttons-display:close;hint-position:bl;hint-opacity:100;"
+                    rev="${image.bigImage}"
+                    class="MagicThumb-swap" style="outline: none; display: inline-block;"><img
+                    src="${image.smallImage}"
+                    alt="${watch.info} img1">
+                </a>
             </c:forEach>
         </div>
     </div>
@@ -773,8 +594,8 @@
     <div class="product-main-info">
         <h1>
                             <span class="brand-name">
-                                ${watch.brand} </span>
-                                                <span class="product-name">
+                                ${watch.brand.name} </span>
+                                                <span id="product-name" class="product-name">
                                                     ${watch.info} </span>
                         <span class="product-ids">
 	                        	                            Item No. ${watch.model}	                                                </span>
@@ -793,8 +614,6 @@
                             <span><fmt:setLocale value="en_US" scope="session"/>
                     <fmt:formatNumber value="${watch.price} "
                                       type="currency"/></span>
-
-
                         </p>
                     </div>
 
@@ -806,7 +625,7 @@
                 <div class="add-to-cart">
 
                     <input name="qty" id="qty" maxlength="12" value="0" type="hidden">
-                    <button class="button" type="button" onclick="productAddToCartForm.submit(this,'/product/cart/add/${watch.id}')"><span><span class="btn btn-5 btn-5a">Buy Now</span></span></button>
+                    <button class="button" type="button" onclick="productAddToCartForm.submit(this,'/product/ajax/cart/add/${watch.id}')"><span><span class="btn btn-5 btn-5a">Buy Now</span></span></button>
                 </div>
 
             </div>
@@ -846,7 +665,7 @@
                                         <label class="label">Brand<span class="prd-tab-colon">:</span></label>
 
                                         <div class="attribute-data">
-                                            <span class="data">${watch.brand}</span>
+                                            <span class="data">${watch.brand.name}</span>
                                         </div>
                                     </li>
                                     <li class="odd">
@@ -867,7 +686,7 @@
                                         <label class="label">Movement<span class="prd-tab-colon">:</span></label>
 
                                         <div class="attribute-data">
-                                            <span class="data">${watch.movement}</span>
+                                            <span class="data">${watch.movement.name}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -960,6 +779,7 @@
                         //jQuery(this).prev('.rating-star').addClass('active');
                     });
                 </script>
+            </dl>
         </div>
     </div>
     <script type="text/javascript">
@@ -1065,6 +885,7 @@ productAddToCartForm.submit = function (button, url) {
         if (url) {
             form.action = url;
         }
+        var productName = jQuery('#product-name').text().trim();
         var e = null;
         if (!url) {
             url = ',/product/notImp/<esi:include src="" />/';
@@ -1086,28 +907,25 @@ productAddToCartForm.submit = function (button, url) {
                 jQuery('#ajax-loader').show();
                 jQuery.ajax({
                     url: url,
-                    dataType: 'json',
+                    dataType: 'html',
                     type: 'post',
                     data: data,
-                    success: function (data) {
-                        jQuery('#ajax-loader').hide();
-                        if (data.status == "SUCCESS") {
+                    statusCode: {
+                        200: function(data) {
+                            jQuery('#ajax-loader').hide();
                             if (jQuery('.top-cart')) {
-                                jQuery('.top-cart').replaceWith(data.sidebar);
+                                jQuery('.top-cart').replaceWith(data);
                                 Enterprise.TopCart.initialize('topCartContent');
+                                showSuccessPopup(productName);
                             }
-                            var popup = '<div id="pdp-success-popup" class="jom-popup"><h3>Added to your Bag!</h3><p>' + data.message + '</p><ul class="popup-buttons-list"><li>' +
-                                    '<a href="/product/cart/view" class="popup-cart-button popup-buttons">View My Bag</a></li><li><a onclick="continueshop()" class="popup-shop-button popup-buttons">Continue Shopping</a></li></ul></div>';
-                            if (jQuery('.giftcard-form').length > 0) {
-                                jQuery('.giftcard-form input#giftcard_amount_input, .giftcard-form input#giftcard_recipient_name, .giftcard-form input#giftcard_recipient_email, .giftcard-form textarea#giftcard_message').val("");
-                            }
-                            jQuery('.page').append(popup);
-                            popupautoclose();
-                        } else if (data.status == "ERROR") {
-                            var popup = '<div id="pdp-success-popup" class="jom-popup"><h3>Unable to add Product</h3><p>' + data.message + '</p><ul class="popup-buttons-list"><li><a onclick="continueshop()" class="popup-shop-button popup-buttons">Continue Shopping</a></li></ul></div>';
-                            jQuery('.page').append(popup);
-                            popupautoclose();
+                        },
+                        404: function(data){
+                            jQuery('#ajax-loader').hide();
+                            showErrorPopup(productName);
                         }
+                    },error:  function(data){
+                        jQuery('#ajax-loader').hide();
+                        showErrorPopup(productName);
                     }
                 });
             }
@@ -1119,6 +937,21 @@ productAddToCartForm.submit = function (button, url) {
         }
     }
 }.bind(productAddToCartForm);
+var showSuccessPopup = function(productName){
+    var popup = '<div id="pdp-success-popup" class="jom-popup"><h3>Added to your Bag!</h3><p>' + productName + '</p><ul class="popup-buttons-list"><li>' +
+            '<a href="/product/cart/view" class="popup-cart-button popup-buttons">View My Bag</a></li><li><a onclick="continueshop()" class="popup-shop-button popup-buttons">Continue Shopping</a></li></ul></div>';
+    if (jQuery('.giftcard-form').length > 0) {
+        jQuery('.giftcard-form input#giftcard_amount_input, .giftcard-form input#giftcard_recipient_name, .giftcard-form input#giftcard_recipient_email, .giftcard-form textarea#giftcard_message').val("");
+    }
+    jQuery('.page').append(popup);
+    popupautoclose();
+};
+
+var showErrorPopup = function(productName){
+    var popup = '<div id="pdp-success-popup" class="jom-popup"><h3>Unable to add Product</h3><p>' + productName + '</p><ul class="popup-buttons-list"><li><a onclick="continueshop()" class="popup-shop-button popup-buttons">Continue Shopping</a></li></ul></div>';
+    jQuery('.page').append(popup);
+    popupautoclose();
+};
 productAddToCartForm.submitWishlist = function (button, url) {
     if (this.validator) {
         var nv = Validation.methods;

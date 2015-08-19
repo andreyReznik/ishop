@@ -1,27 +1,25 @@
 package ua.sourceit.ishop.controller;
 
-import org.apache.velocity.tools.generic.NumberTool;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import ua.sourceit.ishop.entity.Watch;
+import ua.sourceit.ishop.exception.ItemNotFoundException;
 import ua.sourceit.ishop.model.AmountedProperty;
 import ua.sourceit.ishop.model.Cart;
-import ua.sourceit.ishop.model.CartView;
-import ua.sourceit.ishop.model.MiniCartView;
+import ua.sourceit.ishop.service.OrderService;
 import ua.sourceit.ishop.service.ProductPropertyService;
 import ua.sourceit.ishop.service.ProductService;
-import ua.sourceit.ishop.service.VelocityTemplateService;
-import ua.sourceit.ishop.service.email.EmailService;
-import ua.sourceit.ishop.servlet.util.ProductsBound;
-import ua.sourceit.ishop.servlet.util.RequestParameterUtil;
+import ua.sourceit.ishop.util.ProductsBound;
+import ua.sourceit.ishop.util.RequestParameterUtil;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
+ * Controller for product requests
  * @author: areznik
  */
 
@@ -30,20 +28,17 @@ import java.util.List;
 @SessionAttributes(types = Cart.class)
 public class ProductController {
 
-    @Inject
+    @Autowired
     private ProductService productService;
 
-    @Inject
+    @Autowired
     private ProductPropertyService productPropertyService;
 
-    @Inject
-    private EmailService emailService;
-
-    @Inject
-    private VelocityTemplateService velocityTemplateService;
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value="/all")
-    public String ShowProducts(@RequestParam(value = "p", defaultValue = "") String pageId,Cart cart,
+    public String showAll(@RequestParam(value = "p", defaultValue = "") String pageId,Cart cart,
                                ModelMap model) {
         addMiniCartInfo(cart, model);
         ProductsBound productsBound = RequestParameterUtil.getProductBounds(pageId);
@@ -62,76 +57,66 @@ public class ProductController {
     }
 
     @RequestMapping(value="/view/{productId}")
-    public String ViewProduct(@PathVariable("productId") int productId, Cart cart, ModelMap modelMap) {
+    public String viewOne(@PathVariable("productId") int productId, Cart cart, ModelMap modelMap) {
         addMiniCartInfo(cart, modelMap);
         Watch watch = productService.getWatchById(productId);
         if (watch != null){
             modelMap.put("watch", watch);
-            modelMap.put("images", watch.getWatchImages());
             return "product";
-        } else {
-            return "noEntity";
         }
+        return "noEntity";
     }
 
-    @RequestMapping(value="cart/add/{productId}", method = RequestMethod.POST)
-    public @ResponseBody
-    MiniCartView AddProductToCart(@PathVariable("productId") int productId, Cart cart ) {
+    @RequestMapping(value="/ajax/cart/add/{productId}", method = RequestMethod.POST)
+    public
+    String addToCart(@PathVariable("productId") int productId, Cart cart,ModelMap modelMap ) {
         Watch watch = productService.getWatchById(productId);
-        if (watch !=null){
+        if (watch != null){
             cart.addWatch(watch, 1);
+            addMiniCartInfo(cart,modelMap);
+            return  "fragment/miniCart";
         }
-        return  cart.getMiniCartView(watch, velocityTemplateService);
+        throw new ItemNotFoundException("product with id="+productId+" not found!");
     }
 
-    @RequestMapping(value="cart/update/{productId}/{newQty}", method = RequestMethod.GET)
-    public @ResponseBody
-    CartView UpdateCartProductQuantity(@PathVariable("productId") int productId,@PathVariable("newQty") int newQty, Cart cart ) {
+    @RequestMapping(value="/ajax/cart/update/{productId}/{newQty}", method = RequestMethod.GET)
+    public String  updateCartQuantity(@PathVariable("productId") int productId,@PathVariable("newQty") int newQty, Cart cart, ModelMap modelMap ) {
         Watch watch = productService.getWatchById(productId);
         if (watch !=null){
-             cart.updateWatchQuantity(watch, newQty);
+            cart.updateWatchQuantity(watch, newQty);
+            addMiniCartInfo(cart,modelMap);
+            return  "../jsp/fragment/cart";
         }
-        return  cart.getCartView(velocityTemplateService);
+        throw new ItemNotFoundException("product with id="+productId+" not found!");
     }
 
-    @RequestMapping(value="cart/delete/{productId}", method = RequestMethod.GET)
-    public String DeleteProductFromCart(@PathVariable("productId") int productId, Cart cart, HttpServletRequest request) {
+    @RequestMapping(value="/cart/delete/{productId}", method = RequestMethod.GET)
+    public String deleteFromCart(@PathVariable("productId") int productId, Cart cart, HttpServletRequest request) {
         cart.removeWatch(productId);
         return  "redirect:"+request.getHeader("Referer");
     }
 
-    @RequestMapping(value="cart/view", method = RequestMethod.GET)
-    public String ViewCart(ModelMap modelMap, Cart cart) {
+    @RequestMapping(value="/cart/view", method = RequestMethod.GET)
+    public String viewCart(ModelMap modelMap, Cart cart) {
         addMiniCartInfo(cart, modelMap);
-        modelMap.put("watchList",cart.getWatchList());
-        modelMap.put("cart", velocityTemplateService.getCartAsHtml(cart));
-        modelMap.put("grandTotal", velocityTemplateService.getGrandTotalAsHtml(cart));
-        return  "cart";
+        return  "shopBag";
     }
 
-    @RequestMapping(value="cart/checkout", method = RequestMethod.GET)
-    public String CheckOutCart(ModelMap modelMap, Cart cart) {
+    @RequestMapping(value="/order/create", method = RequestMethod.GET)
+    public String createOrder(ModelMap modelMap, Cart cart, SessionStatus status) {
         addMiniCartInfo(cart, modelMap);
-        return  "checkout";
-    }
-
-    @RequestMapping(value="cart/order", method = RequestMethod.POST)
-    public String CreateNewOrder(@RequestParam("email") String email, ModelMap modelMap, Cart cart, SessionStatus status, HttpServletRequest request) {
-        addMiniCartInfo(cart, modelMap);
-        emailService.SendOrderAsync(cart.CreateOrder(), email);
+        orderService.createOrder(cart);
         status.setComplete();
-        return  "redirect:"+request.getHeader("Referer");
+        return  "redirect:/product/all";
     }
 
     @RequestMapping(value="/notImpl")
-    public String NotImplemented() {
+    public String notImplemented() {
         return "notImpl";
     }
 
-    private Cart addMiniCartInfo(Cart cart, final ModelMap modelMap){
-        modelMap.put("miniCart", velocityTemplateService.getMiniCartAsHtml(cart));
-        modelMap.put("number", new NumberTool());
-        return cart;
+    private void addMiniCartInfo(final Cart cart, final ModelMap modelMap){
+        modelMap.put("cart", cart);
     }
 
 }

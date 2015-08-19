@@ -1,66 +1,10 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- ESI END DUMMY COMMENT [] -->
 <div id="turpentine-esi-block-fcf536a99a02c5279350c4de39d2c5f2d98b01d56b511a35776d0059aff04c04" style=""></div>
 <div class="main col1-layout">
 <div class="col-main">
-<div id="login-modal" class=" jom-popup mfp-hide ">
-    <p style="display:none;" class="jqError"></p>
-
-    <form action="/product/notImpl"
-          method="post" id="login-form-main">
-        <div class="col2">
-
-            <h3>Log In</h3>
-
-            <div id="wishlist-cnt"></div>
-            <ul>
-                <li>
-                    <label for="email" class="required">Email Address:<em>*</em></label>
-
-                    <div class="input-box">
-                        <input name="login[username]" id="login-email"
-                               class="input-text required-entry required-entry-login-email validate-email"
-                               title="Email Address" placeholder="Email Address" type="email">
-                    </div>
-                </li>
-                <li>
-                    <label for="pass" class="required">Password:<em>*</em> <a class="jqForgotPassword"
-                                                                              href="#forgotPassword-modal">Forgot your
-                        password?</a></label>
-
-                    <div class="input-box">
-                        <input name="login[password]"
-                               class="input-text required-entry required-entry-login-password validate-password"
-                               id="login-pass" title="Password" placeholder="Password" type="password">
-                    </div>
-                </li>
-
-                <li id="remember-me-box" class="control">
-                    <div class="input-box">
-                        <div id="uniform-remember_mewYbjpKIPOP" class="checker"><span class="checked"><input
-                                name="persistent_remember_me" class="checkbox" id="remember_mewYbjpKIPOP"
-                                checked="checked" title="Remember Me" type="checkbox"></span></div>
-                    </div>
-                    <label for="remember_mewYbjpKIPOP">Remember Me</label>
-                    <a class="link-tip" href="#">(What's this?)</a>
-                </li>
-
-            </ul>
-            <!--<div class="login-hr"></div>-->
-
-            <button type="submit" class="button jqLoginSubmit"><span><span>LOG IN</span></span></button>
-
-
-            <div class="button-box ">
-                <a class="jqRegister" href="#register-modal">CREATE ACCOUNT</a>
-            </div>
-        </div>
-
-    </form>
-    <a title="Log In" id="login" href="#login-modal" class="jqLogin" style="display:none">Log In</a>
-
-</div>
 <script type="text/javascript">
     //<![CDATA[  	
     var showTooltip = function () {
@@ -698,7 +642,7 @@
                 <div class="product-info">
                     <h2 class="product-name">
                         <a href="/product/view/${watch.id}" title="">
-                            <span class="manufacturer">${watch.brand}</span>
+                            <span class="manufacturer">${watch.brand.name}</span>
                                 ${watch.info} </a>
 
                     </h2>

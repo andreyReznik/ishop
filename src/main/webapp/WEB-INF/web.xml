@@ -28,42 +28,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-
-
-
-    <!--<servlet>-->
-        <!--<servlet-name>ShowProductsServlet</servlet-name>-->
-        <!--<servlet-class>ua.sourceit.ishop.servlet.ShowProductsServlet</servlet-class>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>ShowProductsServlet</servlet-name>-->
-        <!--<url-pattern>/product/all/*</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>ProductDetailServlet</servlet-name>-->
-        <!--<servlet-class>ua.sourceit.ishop.servlet.ProductDetailServlet</servlet-class>-->
-    <!--</servlet>-->
-
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>NotImplementedServlet</servlet-name>-->
-        <!--<url-pattern>/product/notImpl/*</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>NotImplementedServlet</servlet-name>-->
-        <!--<servlet-class>ua.sourceit.ishop.servlet.NotImplementedServlet</servlet-class>-->
-    <!--</servlet>-->
-
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>ProductDetailServlet</servlet-name>-->
-        <!--<url-pattern>/product/view/*</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-
     <!--Listeners-->
 
     <listener>
@@ -71,7 +35,7 @@
     </listener>
 
     <listener>
-        <listener-class>ua.sourceit.ishop.servlet.listener.AppContextListener</listener-class>
+        <listener-class>ua.sourceit.ishop.listener.AppContextListener</listener-class>
     </listener>
 
     <!--Filters-->
@@ -87,17 +51,29 @@
 
     <filter>
         <filter-name>DisableUrlSessionFilter</filter-name>
-        <filter-class>ua.sourceit.ishop.servlet.filter.DisableUrlSessionFilter</filter-class>
+        <filter-class>ua.sourceit.ishop.filter.DisableUrlSessionFilter</filter-class>
     </filter>
 
     <filter-mapping>
         <filter-name>DisableUrlSessionFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>hibernateSessionFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>hibernateSessionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
     <!--Exception filter-->
     <filter>
         <filter-name>exception</filter-name>
-        <filter-class>ua.sourceit.ishop.servlet.filter.ExceptionFilter</filter-class>
+        <filter-class>ua.sourceit.ishop.filter.ExceptionFilter</filter-class>
     </filter>
 
     <filter-mapping>

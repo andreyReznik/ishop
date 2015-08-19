@@ -1,6 +1,8 @@
 package ua.sourceit.ishop.servlet.util;
 
 import org.junit.Test;
+import ua.sourceit.ishop.util.ProductsBound;
+import ua.sourceit.ishop.util.RequestParameterUtil;
 
 import static org.junit.Assert.assertEquals;
 

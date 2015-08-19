@@ -1,51 +1,64 @@
 package ua.sourceit.ishop.entity;
 
-import ua.sourceit.ishop.controller.util.PriceUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
- * Product orders
+ * Watches order
  *
  * @author: areznik
  */
 
-public class Order {
+@Entity
+@Table(name="`order`")
+public class Order implements Serializable {
 
     private int id;
-    private User user;
-    private Map<Watch, Integer> watchList;
+    private int userId;
+    private List<OrderProduct> orderProducts;
+    private Date created;
+
 
     public Order() {
-        watchList = new HashMap<>();
+        created = new Date();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_order", unique=true, nullable=false)
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    @Transient
+    public List<OrderProduct> getOrderProducts() {
+        return orderProducts;
+    }
+    public void setOrderProducts(List<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="created", nullable = false)
+    public Date getCreated() {
+        return created;
     }
 
-    public Map<Watch, Integer> getWatchList() {
-        return watchList;
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+    @Column(name="id_user", nullable = false)
+    public int getUserId() {
+        return userId;
     }
 
-    public void setWatchList(Map<Watch, Integer> watchList) {
-        this.watchList = watchList;
-    }
-
-    public float calcTotalPrice(){
-        return PriceUtil.calcTotalPrice(watchList);
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

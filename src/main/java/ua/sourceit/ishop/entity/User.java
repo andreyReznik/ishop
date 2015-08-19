@@ -1,11 +1,17 @@
 package ua.sourceit.ishop.entity;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * User for our system
  *
  * @author: areznik
  */
-
+@Entity
+@Table(name="user")
+@SuppressWarnings("unchecked")
 public class User extends Thing {
 
     private int id;
@@ -15,15 +21,32 @@ public class User extends Thing {
     private String email;
     private String phone;
     private UserRole role;
+    private Set<Order> orderSet = new HashSet<>(0);
 
+
+    public static User createFakeUser(){
+        User user = new User();
+        user.setId(7);
+        user.setLogin("login");
+        user.setPass("pass");
+        user.setName("name");
+        user.setEmail("andrey.reznik1@gmail.com");
+        user.setRole(UserRole.USER_ROLE);
+        user.setPhone("380675460481");
+        return user;
+    };
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_user", unique=true, nullable=false)
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    @Column(name="name", unique=true, nullable=false)
     public String getName() {
         return name;
     }
@@ -32,6 +55,7 @@ public class User extends Thing {
         this.name = name;
     }
 
+    @Column(name="login", unique=true, nullable=false)
     public String getLogin() {
         return login;
     }
@@ -40,6 +64,7 @@ public class User extends Thing {
         this.login = login;
     }
 
+    @Column(name="pass", unique=true, nullable=false)
     public String getPass() {
         return pass;
     }
@@ -48,6 +73,7 @@ public class User extends Thing {
         this.pass = pass;
     }
 
+    @Column(name="email", unique=true, nullable=false)
     public String getEmail() {
         return email;
     }
@@ -56,6 +82,7 @@ public class User extends Thing {
         this.email = email;
     }
 
+    @Column(name="phone", unique=true, nullable=false)
     public String getPhone() {
         return phone;
     }
@@ -64,10 +91,10 @@ public class User extends Thing {
         this.phone = phone;
     }
 
+    @Column(name="role", unique=true, nullable=false)
     public UserRole getRole() {
         return role;
     }
-
     public void setRole(UserRole role) {
         this.role = role;
     }
@@ -88,5 +115,14 @@ public class User extends Thing {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Order.class)
+    public Set<Order> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
     }
 }

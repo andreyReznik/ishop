@@ -1,6 +1,8 @@
 package ua.sourceit.ishop.entity;
 
-import java.util.LinkedList;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -8,33 +10,38 @@ import java.util.List;
  *
  * @author: areznik
  */
+@Entity
+@Table(name="product")
+@SuppressWarnings("unchecked")
+public class Watch extends Thing  {
 
-public class Watch extends Thing {
 
     private int id;
-    private String brand;
+    private Brand brand;
     private String model;
     private String info;
-    private float price;
+    private BigDecimal price;
     private String details;
-    private String gender;
-    private String movement;
+    private Gender gender;
+    private Movement movement;
     private String mainImage;
     private List<WatchImage> watchImages;
 
-
     public Watch() {
-        watchImages = new LinkedList<>();
+       watchImages = Collections.EMPTY_LIST;
     }
 
-    public String getBrand() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_brand", nullable = false)
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 
+    @Column(name="model", nullable = false)
     public String getModel() {
         return model;
     }
@@ -43,6 +50,7 @@ public class Watch extends Thing {
         this.model = model;
     }
 
+    @Column(name="info", nullable = false)
     public String getInfo() {
         return info;
     }
@@ -51,14 +59,16 @@ public class Watch extends Thing {
         this.info = info;
     }
 
-    public float getPrice() {
+    @Column(name="price", nullable = false)
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    @Column(name="details", nullable = false)
     public String getDetails() {
         return details;
     }
@@ -67,22 +77,27 @@ public class Watch extends Thing {
         this.details = details;
     }
 
-    public String getGender() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_gender", nullable = false)
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-    public String getMovement() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_movement", nullable = false)
+    public Movement getMovement() {
         return movement;
     }
 
-    public void setMovement(String movement) {
+    public void setMovement(Movement movement) {
         this.movement = movement;
     }
 
+    @Column(name="imageLink",  nullable = false)
     public String getMainImage() {
         return mainImage;
     }
@@ -91,6 +106,7 @@ public class Watch extends Thing {
         this.mainImage = mainImage;
     }
 
+    @Transient
     public List<WatchImage> getWatchImages() {
         return watchImages;
     }
@@ -99,6 +115,9 @@ public class Watch extends Thing {
         this.watchImages = watchImages;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_product", unique=true, nullable=false)
     public int getId() {
         return id;
     }
@@ -110,7 +129,7 @@ public class Watch extends Thing {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Watch)) return false;
 
         Watch watch = (Watch) o;
 
@@ -123,6 +142,5 @@ public class Watch extends Thing {
     public int hashCode() {
         return id;
     }
-
 }
 

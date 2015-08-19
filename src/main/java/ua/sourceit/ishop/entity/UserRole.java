@@ -6,7 +6,7 @@ package ua.sourceit.ishop.entity;
  * @author: areznik
  */
 
-public enum UserRole {
+public enum UserRole  {
     USER_ROLE(0),
     ADMIN_ROLE(1);
 

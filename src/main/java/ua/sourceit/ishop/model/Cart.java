@@ -1,33 +1,32 @@
 package ua.sourceit.ishop.model;
 
-import org.apache.velocity.app.VelocityEngine;
-import ua.sourceit.ishop.controller.util.PriceUtil;
-import ua.sourceit.ishop.entity.Order;
+import ua.sourceit.ishop.entity.OrderProduct;
+import ua.sourceit.ishop.entity.User;
 import ua.sourceit.ishop.entity.Watch;
-import ua.sourceit.ishop.service.VelocityTemplateService;
 
-import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Cart with chosen products
+ * User cart with chosen products and quantity
  * @author: areznik
  */
 
-public class Cart {
+public class Cart implements Serializable {
 
-    @Inject
-    VelocityEngine velocityEngine;
-
+    private User user;
     private Map<Watch, Integer> watchList;
-
 
     public Cart() {
         this.watchList = new HashMap<>();
+        user = User.createFakeUser();
     }
 
     public void addWatch(Watch watch, int count) {
+        checkForNull(watch);
         if (watchList.containsKey(watch)) {
             Integer current = watchList.get(watch);
             watchList.put(watch, current + count);
@@ -42,18 +41,6 @@ public class Cart {
         watchList.remove(watch);
     }
 
-
-    public MiniCartView getMiniCartView(Watch lastAddedWatch, VelocityTemplateService velocityTemplateService) {
-        if (lastAddedWatch != null){
-            return new MiniCartView(MiniCartView.SUCCESS, lastAddedWatch.getInfo(), velocityTemplateService.getMiniCartAsHtml(this));
-        }
-        return new MiniCartView(MiniCartView.ERROR, "Added lastAddedWatch not found", velocityTemplateService.getMiniCartAsHtml(this));
-    }
-
-    public CartView getCartView(VelocityTemplateService velocityTemplateService) {
-        return new CartView(MiniCartView.SUCCESS, velocityTemplateService.getCartAsHtml(this),velocityTemplateService.getGrandTotalAsHtml(this));
-    }
-
     public Map<Watch, Integer> getWatchList() {
         return watchList;
     }
@@ -63,16 +50,27 @@ public class Cart {
     }
 
     public void updateWatchQuantity(Watch watch, int newQty) {
+        checkForNull(watch);
         watchList.put(watch, newQty);
     }
 
-    public float CalcGrandTotal() {
-        return PriceUtil.calcTotalPrice(watchList);
+    private void checkForNull(Watch watch){
+        if (watch == null)
+            throw new NullPointerException("Null watch not allowed in cart!");
     }
 
-    public Order CreateOrder(){
-        Order order = new Order();
-        order.setWatchList(watchList);
-        return order;
+    public List<OrderProduct> getOrderProducts(){
+        List<OrderProduct> orderProducts = new LinkedList<>();
+        for (Map.Entry<Watch,Integer> entry : watchList.entrySet()){
+            OrderProduct orderProduct = new OrderProduct();
+            orderProduct.setWatchId(entry.getKey().getId());
+            orderProduct.setCount(entry.getValue());
+            orderProducts.add(orderProduct);
+        }
+        return orderProducts;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
