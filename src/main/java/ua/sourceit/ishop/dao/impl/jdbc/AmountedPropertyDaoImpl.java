@@ -1,6 +1,7 @@
 package ua.sourceit.ishop.dao.impl.jdbc;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import ua.sourceit.ishop.dao.AmountedPropertyDao;
 import ua.sourceit.ishop.model.AmountedProperty;
 
@@ -10,8 +11,10 @@ import java.util.List;
 
 /**
  * @author: areznik
+ * use hibernate version of dao instead
  */
-
+ @Deprecated
+ @Repository
 public class AmountedPropertyDaoImpl extends AbstractJdbcDao implements AmountedPropertyDao, RowMapper<AmountedProperty> {
 
     public static final String GET_GENDER_AMOUNT_SQL = "select id_gender, name, amount from gender order by id_gender";
@@ -20,22 +23,21 @@ public class AmountedPropertyDaoImpl extends AbstractJdbcDao implements Amounted
     public static final String GET_BRAND_SQL = "select id_brand, name, 0 as amount from brand order by id_brand";
 
 
-    @Override
     public List<AmountedProperty> getGendersAmount() {
         return doGetProperties(GET_GENDER_AMOUNT_SQL);
     }
 
-    @Override
+
     public List<AmountedProperty> getMovementAmount() {
         return doGetProperties(GET_MOVEMENT_AMOUNT_SQL);
     }
 
-    @Override
+
     public List<AmountedProperty> getPriceGroupAmount() {
         return doGetProperties(GET_PRICE_GROUP_AMOUNT_SQL);
     }
 
-    @Override
+
     public List<AmountedProperty> getBrandAmount() {
         return doGetProperties(GET_BRAND_SQL);
     }
@@ -66,5 +68,10 @@ public class AmountedPropertyDaoImpl extends AbstractJdbcDao implements Amounted
                 return name;
             }
         };
+    }
+
+    @Override
+    public List<AmountedProperty> getProperties(Class<? extends AmountedProperty> clazz) {
+        throw new RuntimeException("Not implemented method");
     }
 }

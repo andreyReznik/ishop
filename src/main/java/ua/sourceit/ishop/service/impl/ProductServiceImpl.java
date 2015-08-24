@@ -2,7 +2,6 @@ package ua.sourceit.ishop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.sourceit.ishop.dao.DictionaryDao;
 import ua.sourceit.ishop.dao.ImageDao;
 import ua.sourceit.ishop.dao.WatchDao;
 import ua.sourceit.ishop.entity.Watch;
@@ -23,12 +22,9 @@ class ProductServiceImpl implements ProductService {
     @Autowired
     private ImageDao imageDao;
 
-    @Autowired
-    private DictionaryDao dictionaryDao;
-
     @Override
-    public List<Watch> getWatchesByRange(int min, int count) {
-          return watchDao.getByRange(min, count);
+    public List<Watch> getWatchesByRange(int offset, int limit) {
+          return watchDao.getByRange(offset, limit);
     }
 
     @Override
@@ -41,15 +37,8 @@ class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addNewWatch(Watch watch) {
-        if (watch != null){
-            int brandId = dictionaryDao.saveAndGetId(watch.getBrand().getName(), "brand");
-            int genderId = dictionaryDao.saveAndGetId(watch.getGender().getName(), "gender");
-            int movementId = dictionaryDao.saveAndGetId(watch.getMovement().getName(), "movement");
-            int productId = watchDao.addNew(watch,brandId,genderId,movementId);
-            imageDao.insertBatch(productId, watch.getWatchImages());
-        }
-
+    public void save(Watch watch) {
+        throw new RuntimeException("Not implemented method");
     }
 
 

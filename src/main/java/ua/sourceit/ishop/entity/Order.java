@@ -3,6 +3,7 @@ package ua.sourceit.ishop.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -19,11 +20,11 @@ public class Order implements Serializable {
     private int id;
     private int userId;
     private List<OrderProduct> orderProducts;
-    private Date created;
+    private Timestamp created;
 
 
     public Order() {
-        created = new Date();
+        created = new Timestamp(new Date().getTime());
     }
 
     @Id
@@ -44,13 +45,12 @@ public class Order implements Serializable {
         this.orderProducts = orderProducts;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="created", nullable = false)
-    public Date getCreated() {
+    public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Timestamp created) {
         this.created = created;
     }
     @Column(name="id_user", nullable = false)

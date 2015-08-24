@@ -54,9 +54,16 @@ public class BasicDataSourceWrapper extends BasicDataSource {
         setInitialSize(initialSize);
         setMaxActive(maxActive);
         setMaxOpenPreparedStatements(maxOpenPreparedStatements);
+        setValidationQuery("SELECT 1;");
+
         LOGGER.info("DBCP connection pool initialized");
     }
 
+    /**
+     * dbcp 1.4 does not implement this method from JDBC 4.1
+     * @return
+     * @throws RuntimeException
+     */
     @Override
     public java.util.logging.Logger getParentLogger() throws SQLFeatureNotSupportedException {
         throw new RuntimeException("Not implemented method");

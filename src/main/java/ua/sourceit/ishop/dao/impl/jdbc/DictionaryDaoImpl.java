@@ -12,8 +12,9 @@ import java.sql.SQLException;
 
 /**
  * @author: areznik
+ * use hibernate version of dao instead
  */
-
+@Deprecated
 @Repository
 public class DictionaryDaoImpl extends AbstractJdbcDao implements DictionaryDao {
 
@@ -21,7 +22,7 @@ public class DictionaryDaoImpl extends AbstractJdbcDao implements DictionaryDao 
     private static final String INSERT_NEW_DICTIONARY_VALUE_SQL = "INSERT into %s(name) values(?)";
 
     @Override
-    public int saveAndGetId(final String name, final String tableName) {
+    public int save(final String name, final String tableName) {
 
         String sql = String.format(GET_DICTIONARY_ID_SQL, tableName, tableName);
 

@@ -15,19 +15,17 @@ import java.util.List;
 @Repository("imageDao")
 public class ImageDaoImpl extends AbstractHibernateDao implements ImageDao {
     @Override
-    public void insertBatch(int productId, List<WatchImage> images) {
+    public void saveForProduct(int productId, List<WatchImage> images) {
         throw new RuntimeException("Not implemented method");
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<WatchImage> getWatchImages(Watch watch) {
-        HibernateDebugUtil.turnOnShowSQL();
         List<WatchImage> watchImages = getSession()
                         .createCriteria(WatchImage.class)
                         .add(Restrictions.eq("watch",watch ))
                         .list();
-        HibernateDebugUtil.turnOffShowSQL();
         return watchImages;
     }
 }

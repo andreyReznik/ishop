@@ -1,6 +1,7 @@
 package ua.sourceit.ishop.dao.impl.jdbc;
 
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.stereotype.Repository;
 import ua.sourceit.ishop.entity.WatchImage;
 
 import java.sql.PreparedStatement;
@@ -11,8 +12,10 @@ import java.util.List;
 
 /**
  * @author: areznik
+ * use hibernate version of dao instead
  */
-
+@Deprecated
+@Repository
 public class ImageBatchPreparedStatementSetter implements BatchPreparedStatementSetter {
 
     private final List<WatchImage> images;

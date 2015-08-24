@@ -12,11 +12,9 @@ import ua.sourceit.ishop.entity.Order;
 public class OrderDaoImpl extends AbstractHibernateDao implements OrderDao{
     @Override
     public int save(Order order) {
-        HibernateDebugUtil.turnOnShowSQL();
         Session session = getSession();
         session.save(order);
         session.flush();
-        HibernateDebugUtil.turnOffShowSQL();
         return order.getId();
     }
 }

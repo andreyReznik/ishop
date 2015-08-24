@@ -12,11 +12,12 @@ import java.util.List;
 
 public interface ProductPropertyService {
 
-    public List<AmountedProperty> getGendersAmount();
+    /**
+     * Get product property list
+     * @param clazz Class of AmountedProperty
+     * @return AmountedProperty list
+     */
+    List<AmountedProperty> getProperties(Class<? extends AmountedProperty> clazz);
 
-    public List<AmountedProperty> getMovementAmount();
 
-    public List<AmountedProperty> getPriceGroupAmount();
-
-    public List<AmountedProperty> getBrandsAmount();
 }

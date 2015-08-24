@@ -409,7 +409,7 @@
                 beforeOpen: function () {
                     jQuery('#followup-modal').find('.jqError').html('');
                     jQuery('#followup-modal').find('.jqError').hide();
-                },
+                }
             }
         });
     });

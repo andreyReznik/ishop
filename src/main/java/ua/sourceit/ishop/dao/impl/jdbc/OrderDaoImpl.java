@@ -3,6 +3,7 @@ package ua.sourceit.ishop.dao.impl.jdbc;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import ua.sourceit.ishop.dao.OrderDao;
 import ua.sourceit.ishop.entity.Order;
 
@@ -13,9 +14,11 @@ import java.sql.Timestamp;
 
 /**
  * @author: areznik
+ * use hibernate version of dao instead
  */
 
-
+@Deprecated
+@Repository
 public class OrderDaoImpl extends AbstractJdbcDao implements OrderDao  {
 
     private static final String INSERT_ORDER_SQL = "insert into `order`(id_user, created) values(?,?) ";

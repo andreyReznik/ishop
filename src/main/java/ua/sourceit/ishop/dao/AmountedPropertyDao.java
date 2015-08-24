@@ -12,11 +12,11 @@ import java.util.List;
 
 public interface AmountedPropertyDao {
 
-    public List<AmountedProperty> getGendersAmount();
+    /**
+     * Get amounted property list
+     * @param clazz Class of AmountedProperty
+     * @return AmountedProperty list
+     */
+    public List<AmountedProperty> getProperties(Class<? extends AmountedProperty> clazz);
 
-    public List<AmountedProperty> getMovementAmount();
-
-    public List<AmountedProperty> getPriceGroupAmount();
-
-    public List<AmountedProperty> getBrandAmount();
 }

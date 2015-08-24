@@ -1,6 +1,7 @@
 package ua.sourceit.ishop.dao.impl.jdbc;
 
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.stereotype.Repository;
 import ua.sourceit.ishop.entity.Order;
 import ua.sourceit.ishop.entity.OrderProduct;
 
@@ -10,8 +11,11 @@ import java.util.Iterator;
 
 /**
  * @author: areznik
+ * use hibernate version of dao instead
  */
 
+@Deprecated
+@Repository
 public class OrderProductBatchPreparedStatementSetter implements BatchPreparedStatementSetter {
 
 

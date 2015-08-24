@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * Filter for disabling JSESSIONID in URL
  * @author: areznik
  */
 

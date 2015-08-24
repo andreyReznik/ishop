@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <div id="bag-content">
     <table id="shopping-cart-table" class="data-table cart-table">
@@ -29,8 +31,27 @@
             <td colspan="50" class="a-right last">
                 <button type="button" title="Continue Shopping" class="button btn-continue"
                         onclick="window.history.back();"><span><span>Continue Shopping</span></span></button>
-                <button onclick="window.location='/product/order/create';"  name="update_cart_action" value="empty_cart" title="CHECKOUT"
-                        class="button btn-empty" id="empty_cart_button"><span><span>MAKE ORDER</span></span></button>
+
+
+                <sec:authorize access="isAnonymous()">
+                    <c:set var="orderLink" scope="session" value="/needLogin"/>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <c:set var="orderLink" scope="session" value="/product/order/create"/>
+                </sec:authorize>
+
+                <c:if test="${cart.watchList.size() != 0 }">
+                <button
+                        onclick="window.location='${orderLink}';"
+
+                        name="update_cart_action" value="empty_cart" title="CHECKOUT"
+                        class="button btn-empty" id="empty_cart_button">
+                    <span>
+                        <span>MAKE ORDER</span>
+                    </span>
+                </button>
+                </c:if>
+
                 <!--[if lt IE 8]>
                 <input type="hidden" id="update_cart_action_container"/>
                 <script type="text/javascript">
@@ -107,7 +128,7 @@
                             </span>
                                 </span>
             </td>
-            <td class="a-center cart-item-remove last"><a href="/product/cart/delete/${entry.key.id}" title="Remove"
+            <td class="a-center cart-item-remove last"><a href="/product/cart/delete/${entry.key.id}" onclick="return confirm('Are you sure you would like to remove this item from the shopping cart?');" title="Remove"
                                                           class="btn-remove btn-remove2">X</a></td>
         </tr>
         </tbody>
@@ -125,13 +146,17 @@
                 <td  class="a-left " colspan="1">
                     <strong style="color:black">Grand Total:</strong>
                 </td>
-                <td style="" class="a-right ">
-                    <strong><span id="grand-total" class="price">
-                    <fmt:setLocale value="en_US" scope="session"/>
-                    <fmt:formatNumber value="${grandTotal}"
-                                      type="currency"/>
-                    </span></strong>
-                </td>
+
+                <c:if test="${cart.watchList.size() != 0 }">
+                    <td style="" class="a-right ">
+                        <strong><span id="grand-total" class="price">
+                        <fmt:setLocale value="en_US" scope="session"/>
+                        <fmt:formatNumber value="${grandTotal}"
+                                          type="currency"/>
+                        </span></strong>
+                    </td>
+                </c:if>
+
             </tr>
             </tfoot>
         </table>

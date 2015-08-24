@@ -1,8 +1,8 @@
 package ua.sourceit.ishop.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * User for our system
@@ -21,20 +21,20 @@ public class User extends Thing {
     private String email;
     private String phone;
     private UserRole role;
-    private Set<Order> orderSet = new HashSet<>(0);
 
 
-    public static User createFakeUser(){
+    public static User createWithUserRole(String name, String email, String password){
         User user = new User();
-        user.setId(7);
-        user.setLogin("login");
-        user.setPass("pass");
-        user.setName("name");
-        user.setEmail("andrey.reznik1@gmail.com");
+        user.setLogin(email);
+        user.setPass(password);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPhone("");
         user.setRole(UserRole.USER_ROLE);
-        user.setPhone("380675460481");
+        user.setCreated(new Timestamp(new Date().getTime()));
+        user.setActive(true);
         return user;
-    };
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,7 +82,7 @@ public class User extends Thing {
         this.email = email;
     }
 
-    @Column(name="phone", unique=true, nullable=false)
+    @Column(name="phone",  nullable = true)
     public String getPhone() {
         return phone;
     }
@@ -117,12 +117,4 @@ public class User extends Thing {
         return id;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Order.class)
-    public Set<Order> getOrderSet() {
-        return orderSet;
-    }
-
-    public void setOrderSet(Set<Order> orderSet) {
-        this.orderSet = orderSet;
-    }
 }

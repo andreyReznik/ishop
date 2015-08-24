@@ -5,6 +5,8 @@
 <div class="page-title">
     <h1 style="color:black">Shopping Cart</h1>
 </div>
+
+
     <jsp:include page="../jsp/fragment/cart.jsp"></jsp:include>
 <div id="cart-collaterals" class="cart-collaterals">
     <script type="text/javascript">

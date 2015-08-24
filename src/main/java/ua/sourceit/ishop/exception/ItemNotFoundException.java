@@ -1,6 +1,7 @@
 package ua.sourceit.ishop.exception;
 
 /**
+ * Throw when searching item not found.
  * @author: areznik
  */
 

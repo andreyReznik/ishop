@@ -463,7 +463,7 @@ body {
     background: #fff;
     font: 400 normal 11px/1.35 "proxima-nova-n4", "proxima-nova", sans-serif;
     color: #444;
-    text-align: center;
+    text-align: left;
     -webkit-text-size-adjust: none;
 }
 
@@ -666,7 +666,7 @@ ul, ol {
 .page {
     width: 1156px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
     margin-top: -38px;
     padding: 0 20px
 }
@@ -1069,7 +1069,7 @@ p.required {
     font-size: 12px;
     font-weight: bold;
     color: #444;
-    text-align: right;
+    text-align: left;
 }
 
 .form-list .value {
@@ -1534,10 +1534,10 @@ p.error-msg {
     margin-top: 8px;
 }
 
-.page-title h1, .page-title h2 {
-    font: normal 22px/27px Arial, Helvetica, sans-serif;
-    color: #d12c01;
-}
+/*.page-title h1, .page-title h2 {*/
+    /*font: normal 22px/27px Arial, Helvetica, sans-serif;*/
+    /*color: #d12c01;*/
+/*}*/
 
 .title-buttons {
     text-align: right;
@@ -7899,6 +7899,8 @@ ul.cms-menu.type-square ul {
     margin: 0;
 }
 
+.customer-account-login .col1-layout .col-main .page-title h1,.customer-account-create h2,.customer-account-forgotpassword .col1-layout .col-main .page-title h1,.customer-account-resetpassword .col1-layout .col-main .page-title h1{font-family:"proxima-nova-n3","proxima-nova",sans-serif;font-weight:300;font-size:65px;color:#000000;padding:0 0 38px 0;line-height:normal;}
+
 .checkout-amazon-payments-index .data-table tfoot td strong {
     color: #414c5c;
     font-family: "proxima-nova-n6", "proxima-nova", sans-serif;
@@ -8023,6 +8025,10 @@ ul.cms-menu.type-square ul {
 
 .cart-table .btn-empty {
     float: right;
+}
+
+.cart-table .btn-left {
+    float: left;
 }
 
 .cart-table {

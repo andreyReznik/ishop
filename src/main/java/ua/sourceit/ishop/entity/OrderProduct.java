@@ -1,6 +1,7 @@
 package ua.sourceit.ishop.entity;
 
 /**
+ * Product for Order
  * @author: areznik
  */
 

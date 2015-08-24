@@ -9,8 +9,12 @@ package ua.sourceit.ishop.util;
 public class RequestParameterUtil {
 
 
+    /**
+     * Get product bound for showing on page
+     * @param param  page request param
+     * @return  ProductsBound object
+     */
     public static ProductsBound getProductBounds(String param) {
-
         int pageNum;
         if ((param == null) || ("".equals(param))) {
             return new ProductsBound(0, 20);
@@ -31,9 +35,13 @@ public class RequestParameterUtil {
                     return new ProductsBound(0, 20);
             }
         }
-
     }
 
+    /**
+     * Get next page for watch pagination
+     * @param param  current request page
+     * @return   next page
+     */
     public static int getNextPage(String param) {
         int intValue;
         try {
@@ -41,20 +49,14 @@ public class RequestParameterUtil {
         } catch (NumberFormatException ex) {
             return 2;
         }
-
-        int pageNum = 0;
         if ((param == null) || (intValue < 2)) {
             return 2;
         } else {
-
             int nextValue = intValue + 1;
-            if (nextValue > 4)
+            if (nextValue > 4){
                 return 0;
-            else return nextValue;
-
-
+            }
+            return nextValue;
         }
-
     }
-
 }

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Watch gender
  * @author: areznik
  */
 @Entity

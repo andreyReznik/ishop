@@ -24,10 +24,23 @@
         <mockito.version>1.9.5</mockito.version>
         <javax.mail.version>1.4.7</javax.mail.version>
         <log4j.version>1.2.17</log4j.version>
-        <hibernate.version>4.3.5.Final</hibernate.version>
-        <hibernate.core.version>4.2.5.Final</hibernate.core.version>
+
+        <hibernate.version>4.2.20.Final</hibernate.version>
+        <hibernate.core.version>4.2.20.Final</hibernate.core.version>
+        <hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
+
         <apache.common.lang.version>3.1</apache.common.lang.version>
+        <restfb.version>1.14.0</restfb.version>
+        <!--<restfb.version>1.6.16</restfb.version>-->
+        <javax.validation.version>1.0.0.GA</javax.validation.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>JBoss repository</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 
 
     <build>
@@ -75,6 +88,7 @@
             <version>${javax.servlet.version}</version>
             <scope>provided</scope>
         </dependency>
+
 
         <!--Spring-->
         <dependency>
@@ -125,6 +139,24 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>${commons.logging.version}</version>
@@ -142,6 +174,12 @@
             <version>${hibernate.version}</version>
         </dependency>
 
+        <!-- Hibernate Validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
+        </dependency>
 
         <!-- Jackson JSON Mapper -->
         <dependency>
@@ -175,6 +213,13 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>${javax.mail.version}</version>
+        </dependency>
+
+        <!--Facebook login-->
+        <dependency>
+            <groupId>com.restfb</groupId>
+            <artifactId>restfb</artifactId>
+            <version>${restfb.version}</version>
         </dependency>
 
         <!--Test-->

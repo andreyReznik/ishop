@@ -1,6 +1,7 @@
 package ua.sourceit.ishop.dao.impl.jdbc;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import ua.sourceit.ishop.dao.ImageDao;
 import ua.sourceit.ishop.entity.Watch;
 import ua.sourceit.ishop.entity.WatchImage;
@@ -11,8 +12,10 @@ import java.util.List;
 
 /**
  * @author: areznik
+ * use hibernate version of dao instead
  */
-
+@Deprecated
+@Repository
 public class ImageDaoImpl extends AbstractJdbcDao implements ImageDao, RowMapper<WatchImage> {
 
     private static final String INSERT_IMAGE_SQL = "insert into image (id_product, link, smallLink,created,active) values(?,?,?,?,?)";
@@ -20,7 +23,7 @@ public class ImageDaoImpl extends AbstractJdbcDao implements ImageDao, RowMapper
             "from image where id_product = ?;";
 
     @Override
-    public void insertBatch(int productId, List<WatchImage> images) {
+    public void saveForProduct(int productId, List<WatchImage> images) {
 
         getJdbcTemplate().batchUpdate(INSERT_IMAGE_SQL, new ImageBatchPreparedStatementSetter(productId, images));
 

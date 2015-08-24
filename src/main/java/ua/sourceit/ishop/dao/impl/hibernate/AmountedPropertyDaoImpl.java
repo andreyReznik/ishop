@@ -20,36 +20,10 @@ import java.util.List;
 public class AmountedPropertyDaoImpl extends AbstractHibernateDao implements AmountedPropertyDao {
 
     @Override
-    public List<AmountedProperty> getGendersAmount() {
-        return doGetAmountedProperty(Gender.class);
-    }
-
-    @Override
-    public List<AmountedProperty> getMovementAmount() {
-        return doGetAmountedProperty(Movement.class);
-    }
-
-    @Override
-    public List<AmountedProperty> getPriceGroupAmount() {
-        return doGetAmountedProperty(PriceGroup.class);
-    }
-
-    @Override
-    public List<AmountedProperty> getBrandAmount() {
-        HibernateDebugUtil.turnOnShowSQL();
-        List<AmountedProperty> list =  (getSession().createCriteria(Brand.class)
-                .addOrder(Order.asc("id"))
-                .list());
-        HibernateDebugUtil.turnOffShowSQL();
-        return list;
-    }
-
-    private List<AmountedProperty> doGetAmountedProperty(Class clazz){
-        HibernateDebugUtil.turnOnShowSQL();
+    public List<AmountedProperty> getProperties(Class<? extends AmountedProperty> clazz) {
         List<AmountedProperty> list =  (getSession().createCriteria(clazz)
                 .addOrder(Order.asc("id"))
                 .list());
-        HibernateDebugUtil.turnOffShowSQL();
         return list;
     }
 }

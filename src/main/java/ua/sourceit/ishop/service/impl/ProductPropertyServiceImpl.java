@@ -15,30 +15,11 @@ import java.util.List;
 @Service("productPropertyService")
 public class ProductPropertyServiceImpl implements ProductPropertyService {
 
-
     @Autowired
     private AmountedPropertyDao amountedPropertyDao;
 
     @Override
-    public List<AmountedProperty> getGendersAmount() {
-        return amountedPropertyDao.getGendersAmount();
+    public List<AmountedProperty> getProperties(Class<? extends AmountedProperty> clazz) {
+        return amountedPropertyDao.getProperties(clazz);
     }
-
-    @Override
-    public List<AmountedProperty> getMovementAmount() {
-        return amountedPropertyDao.getMovementAmount();
-    }
-
-
-    @Override
-    public List<AmountedProperty> getPriceGroupAmount() {
-        return amountedPropertyDao.getPriceGroupAmount();
-    }
-
-    @Override
-    public List<AmountedProperty> getBrandsAmount() {
-        return amountedPropertyDao.getBrandAmount();
-    }
-
-
 }

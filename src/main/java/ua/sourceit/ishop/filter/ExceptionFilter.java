@@ -6,7 +6,7 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /**
- * Filter that catch any exceptions
+ * Filter that catch uncaught exceptions
  *
  * @author: areznik
  */

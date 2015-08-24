@@ -6,6 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import ua.sourceit.ishop.entity.Order;
+import ua.sourceit.ishop.entity.User;
 import ua.sourceit.ishop.service.EmailService;
 
 import javax.annotation.PreDestroy;
@@ -32,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSender mailSender;
 
     @Override
-    public void sendOrderAsync(final Order order, final String email) {
+    public void sendOrderAsync(final Order order, final User user) {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -40,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
                 try {
                     MimeMessageHelper helper = new MimeMessageHelper(message, true);
                     helper.setFrom("a.reznik.developer@gmail.com");
-                    helper.setTo(email);
+                    helper.setTo(user.getEmail());
                     helper.setSubject("ishop");
                     helper.setText("Your order num: "+order.getId(), false);
                     mailSender.send(message);
@@ -53,7 +54,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @PreDestroy
-    private void destroy(){
+    public void destroy(){
         executorService.shutdown();
     }
 

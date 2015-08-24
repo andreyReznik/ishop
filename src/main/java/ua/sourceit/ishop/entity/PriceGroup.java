@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
+ * Order price category
  * @author: areznik
  */
 @Entity

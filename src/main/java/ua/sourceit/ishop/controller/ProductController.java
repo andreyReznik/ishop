@@ -5,13 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import ua.sourceit.ishop.entity.Watch;
+import ua.sourceit.ishop.entity.*;
 import ua.sourceit.ishop.exception.ItemNotFoundException;
 import ua.sourceit.ishop.model.AmountedProperty;
 import ua.sourceit.ishop.model.Cart;
+import ua.sourceit.ishop.security.SecurityUtils;
 import ua.sourceit.ishop.service.OrderService;
 import ua.sourceit.ishop.service.ProductPropertyService;
 import ua.sourceit.ishop.service.ProductService;
+import ua.sourceit.ishop.service.UserService;
 import ua.sourceit.ishop.util.ProductsBound;
 import ua.sourceit.ishop.util.RequestParameterUtil;
 
@@ -37,16 +39,19 @@ public class ProductController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value="/all")
     public String showAll(@RequestParam(value = "p", defaultValue = "") String pageId,Cart cart,
                                ModelMap model) {
         addMiniCartInfo(cart, model);
         ProductsBound productsBound = RequestParameterUtil.getProductBounds(pageId);
         List<Watch> watches = productService.getWatchesByRange(productsBound.getOffset(), productsBound.getLimit());
-        List<AmountedProperty> genders = productPropertyService.getGendersAmount();
-        List<AmountedProperty> movements = productPropertyService.getMovementAmount();
-        List<AmountedProperty> priceGroups = productPropertyService.getPriceGroupAmount();
-        List<AmountedProperty> brands = productPropertyService.getBrandsAmount();
+        List<AmountedProperty> genders = productPropertyService.getProperties(Gender.class);
+        List<AmountedProperty> movements = productPropertyService.getProperties(Movement.class);
+        List<AmountedProperty> priceGroups = productPropertyService.getProperties(PriceGroup.class);
+        List<AmountedProperty> brands = productPropertyService.getProperties(Brand.class);
         model.put("watches", watches);
         model.put("genders", genders);
         model.put("movements", movements);
@@ -107,7 +112,10 @@ public class ProductController {
         addMiniCartInfo(cart, modelMap);
         orderService.createOrder(cart);
         status.setComplete();
-        return  "redirect:/product/all";
+        User user = userService.getById(SecurityUtils.getCurrentIdAccount());
+        modelMap.remove("cart");
+        modelMap.put("email",user.getEmail());
+        return  "orderSent";
     }
 
     @RequestMapping(value="/notImpl")

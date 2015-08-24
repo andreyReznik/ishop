@@ -13,13 +13,10 @@ import ua.sourceit.ishop.entity.OrderProduct;
 public class OrderProductDaoImpl extends AbstractHibernateDao implements OrderProductDao {
     @Override
     public void save(Order order) {
-        HibernateDebugUtil.turnOnShowSQL();
         Session session = getSession();
         for (OrderProduct orderProduct : order.getOrderProducts()){
             orderProduct.setOrderId(order.getId());
             session.save(order);
-            session.flush();
         }
-        HibernateDebugUtil.turnOffShowSQL();
     }
 }

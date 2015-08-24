@@ -8,9 +8,11 @@ import javax.sql.DataSource;
 
 /**
  * @author: areznik
+ * @Deprecated use hibernate version of dao instead
  */
 
 @Repository
+@Deprecated
 public abstract class AbstractJdbcDao {
 
     private JdbcTemplate jdbcTemplate;

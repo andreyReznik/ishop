@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS `gender`;
 DROP table if exists `movement`;
 DROP table if exists `order_product`;
 DROP table if exists `price_group`;
+DROP table if exists `persistent_logins`;
+
 
 
 CREATE TABLE `user` (
@@ -22,7 +24,7 @@ CREATE TABLE `user` (
 	`role` int NOT NULL,
 	`created` TIMESTAMP NOT NULL,
 	`updated` TIMESTAMP,
-	`active` bit,
+	`active` bit NOT NULL,
 	PRIMARY KEY (`id_user`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
@@ -96,6 +98,14 @@ CREATE TABLE `price_group` (
 	`amount` int NOT NULL,
 	PRIMARY KEY (`id_price_group`)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE persistent_logins (
+    username varchar(64) not null,
+    series varchar(64) not null,
+    token varchar(64) not null,
+    last_used timestamp not null,
+    PRIMARY KEY (series)
+);
 
 insert into price_group(id_price_group, name, min_bound,max_bound, amount) value(0,'<$100',0,100,0);
 insert into price_group(id_price_group, name, min_bound,max_bound, amount) value(1,'$100-$250',100,250,0);

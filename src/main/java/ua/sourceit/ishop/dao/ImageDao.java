@@ -13,7 +13,18 @@ import java.util.List;
 
 public interface ImageDao {
 
-    public void insertBatch(int productId, List<WatchImage> images);
+    /**
+     * Save additional product images
+     * @param productId product id
+     * @param images list of WatchImages
+     */
+    public void saveForProduct(int productId, List<WatchImage> images);
 
+
+    /**
+     * Get product images
+     * @param watch for images
+     * @return WatchImages list
+     */
     List<WatchImage> getWatchImages(Watch watch);
 }

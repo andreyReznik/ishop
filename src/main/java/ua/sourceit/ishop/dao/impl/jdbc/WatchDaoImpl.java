@@ -15,8 +15,10 @@ import java.util.List;
 
 /**
  * @author: areznik
+ * use hibernate version of dao instead
  */
 
+@Deprecated
 public class WatchDaoImpl extends AbstractJdbcDao implements WatchDao, RowMapper<Watch> {
 
     public static final String GET_BY_RANGE_SQL = "SELECT id_product, b.name as brand, model, info, price, details,  g.name as gender, " +
@@ -54,7 +56,7 @@ public class WatchDaoImpl extends AbstractJdbcDao implements WatchDao, RowMapper
     }
 
     @Override
-    public int addNew(final Watch watch,final int brandId,final int genderId,final int movementId) {
+    public int save(final Watch watch, final int brandId, final int genderId, final int movementId) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         getJdbcTemplate().update(
                 new PreparedStatementCreator() {

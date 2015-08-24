@@ -4,20 +4,23 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
+ * Base class for entity which can be active,
+ * can be updated and store created time
  * @author: areznik
  */
-
+@MappedSuperclass
 public abstract class Thing implements Serializable {
 
     private Timestamp created;
-    private long updated;
+    private Timestamp updated;
     private boolean active;
 
-    @Column
+    @Column(name="created", nullable = false)
     public Timestamp getCreated() {
         return created;
     }
@@ -25,12 +28,13 @@ public abstract class Thing implements Serializable {
     public void setCreated(Timestamp created) {
         this.created = created;
     }
-    @Column
-    public long getUpdated() {
+
+    @Column(name="updated")
+    public Timestamp getUpdated() {
         return updated;
     }
 
-    public void setUpdated(long updated) {
+    public void setUpdated(Timestamp updated) {
         this.updated = updated;
     }
 
@@ -40,7 +44,7 @@ public abstract class Thing implements Serializable {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).toString();
     }
 
-    @Column
+    @Column(name="active")
     public boolean isActive() {
         return active;
     }

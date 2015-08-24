@@ -1,7 +1,8 @@
 package ua.sourceit.ishop.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import ua.sourceit.ishop.entity.OrderProduct;
-import ua.sourceit.ishop.entity.User;
 import ua.sourceit.ishop.entity.Watch;
 
 import java.io.Serializable;
@@ -17,12 +18,10 @@ import java.util.Map;
 
 public class Cart implements Serializable {
 
-    private User user;
     private Map<Watch, Integer> watchList;
 
     public Cart() {
         this.watchList = new HashMap<>();
-        user = User.createFakeUser();
     }
 
     public void addWatch(Watch watch, int count) {
@@ -70,7 +69,8 @@ public class Cart implements Serializable {
         return orderProducts;
     }
 
-    public User getUser() {
-        return user;
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
