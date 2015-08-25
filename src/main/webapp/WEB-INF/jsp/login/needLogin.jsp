@@ -1,5 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div>
-    <h1 class="body">To place an order you need to log in.</h1>
-    <h1 class="body">You can also use authentication via the social network Facebook</h1>
+    <table>
+        <tr>
+            <td>
+                <h1 class="body">To place an order you need to log in.</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h1 class="body">You can also use authentication via the social network Facebook</h1>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="social-media-icons">
+            <a class="footer-face-book-ic" href="/fbLogin" target="_blank"></a></span>
+            </td>
+        </tr>
+    </table>
 </div>

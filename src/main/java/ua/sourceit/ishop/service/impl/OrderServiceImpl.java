@@ -9,7 +9,6 @@ import ua.sourceit.ishop.dao.UserDao;
 import ua.sourceit.ishop.entity.Order;
 import ua.sourceit.ishop.entity.User;
 import ua.sourceit.ishop.model.Cart;
-import ua.sourceit.ishop.security.SecurityUtils;
 import ua.sourceit.ishop.service.EmailService;
 import ua.sourceit.ishop.service.OrderService;
 
@@ -33,14 +32,13 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional()
-    public int createOrder(Cart cart) {
+    public int createOrder(Cart cart, User user) {
         Order order = new Order();
         order.setOrderProducts(cart.getOrderProducts());
-        User currentUser = userDao.getById(SecurityUtils.getCurrentIdAccount());
-        order.setUserId(currentUser.getId());
+        order.setUserId(user.getId());
         int orderNum = orderDao.save(order);
         orderProductDao.save(order);
-        emailService.sendOrderAsync(order,currentUser);
+        emailService.sendOrderAsync(order,user);
         return orderNum;
     }
 }

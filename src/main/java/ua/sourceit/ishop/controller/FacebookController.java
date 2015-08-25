@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.sourceit.ishop.security.SecurityUtils;
 import ua.sourceit.ishop.service.UserService;
 import ua.sourceit.ishop.util.ApplicationConstant;
 
@@ -73,7 +74,8 @@ public class FacebookController implements InitializingBean {
         }
         User user = getFacebookUser(code);
         LOGGER.error("FB user email= "+ user.getEmail());
-        userService.authenticateFromFB(user);
+        ua.sourceit.ishop.entity.User iShopUser = userService.authenticateFromFB(user);
+        SecurityUtils.authenticate(iShopUser);
         String url = (String) session.getAttribute(ApplicationConstant.NEED_REDIRECT_AFTER_LOGIN_URL);
         if (url == null){
             url = "/product/all";

@@ -1168,26 +1168,6 @@ a.tcapiScButton {
 <div class="footer-container">
     <div class="footer">
         <div class="footer-top">
-            <form action="email-preference-center" method="get">
-                <%--<div class="form-subscribe">--%>
-                <%--<div class="form-subscribe-header">--%>
-                <%--<label for="newsletter">Enter your email address to get updates<span--%>
-                <%--class="no-display-mob">:</span></label>--%>
-                <%--</div>--%>
-                <%--<div class="v-fix"><input name="email" id="newsletter"--%>
-                <%--class="input-text required-entry validate-email"--%>
-                <%--placeholder="Email Address" type="email">--%>
-                <%--<button type="submit" class="button" title="Sign Up"><span><span></span></span></button>--%>
-                <%--</div>--%>
-                <%--<p class="jqMessage" style="display:none;"></p>--%>
-                <%--</div>--%>
-            </form>
-            <%--<div class="social-media-icons"><a class="footer-face-book-ic" href="https://www.facebook.com/ishop"--%>
-            <%--target="_blank"></a> <a class="footer-twitter-ic"--%>
-            <%--href="https://twitter.com/ishop"--%>
-            <%--target="_blank"></a><a--%>
-            <%--class="footer-pinterest-ic" href="http://www.pinterest.com/ishop/" target="_blank"></a> <a--%>
-            <%--class="footer-googleplus-ic" href="https://plus.google.com/+ishop" target="_blank"></a></div>--%>
         </div>
         <script type="text/javascript">
             //<![CDATA[

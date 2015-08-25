@@ -2,9 +2,7 @@ package ua.sourceit.ishop.controller;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -53,12 +51,6 @@ public class CommonController implements InitializingBean{
         return "redirect:"+redirects.get(currentAccount.getRole());
     }
 
-    @RequestMapping(value={"/admin"},method = RequestMethod.GET)
-    public String admin() {
-        return  "admin";
-    }
-
-
     @RequestMapping(value={"/login", "/loginFailed"},method = RequestMethod.GET)
     public String loginUser() {
         return  "login/login";
@@ -83,6 +75,7 @@ public class CommonController implements InitializingBean{
         User iShopUser;
         try{
             iShopUser = userService.registerNewUser(userDto);
+            SecurityUtils.authenticate(iShopUser);
             return new ModelAndView("registration/successRegister", "name", iShopUser.getName());
         }catch (UserWithThisEmailAlreadyExists ex){
             result.rejectValue("email", "",null,ex.getMessage());

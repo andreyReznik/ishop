@@ -34,11 +34,6 @@ public class SecurityUtils {
     }
 
     public static void authenticate(User iShopUser) {
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(
-//                new CurrentAccount(iShopUser),
-//                iShopUser.getPass(),
-//                UserAuthenticationService.convert(Arrays.asList(iShopUser.getRole())));
-
         Authentication authentication = new RememberMeAuthenticationToken("iShopRememberMeKey",
                 new CurrentAccount(iShopUser),
                 UserAuthenticationService.convert(Arrays.asList(iShopUser.getRole())));

@@ -110,9 +110,9 @@ public class ProductController {
     @RequestMapping(value="/order/create", method = RequestMethod.GET)
     public String createOrder(ModelMap modelMap, Cart cart, SessionStatus status) {
         addMiniCartInfo(cart, modelMap);
-        orderService.createOrder(cart);
-        status.setComplete();
         User user = userService.getById(SecurityUtils.getCurrentIdAccount());
+        orderService.createOrder(cart,user);
+        status.setComplete();
         modelMap.remove("cart");
         modelMap.put("email",user.getEmail());
         return  "orderSent";
