@@ -25,14 +25,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional()
     public User authenticateFromFB(com.restfb.types.User user) {
-        String email = user.getEmail();
-        //FIXME(facebook doesn't return user email, only name and Id key)
-        if (email == null){
-            email = "andrey.reznik1@gmail.com";
-        }
-        User iShopUser = userDao.findByEmail(email);
+        User iShopUser = userDao.findByEmail(user.getEmail());
         if (iShopUser == null){
-            iShopUser = User.createWithUserRole(user.getName(),email,UUID.randomUUID().toString());
+            iShopUser = User.createWithUserRole(user.getName(),user.getEmail(),UUID.randomUUID().toString());
             userDao.save(iShopUser);
         }
         return iShopUser;

@@ -2,6 +2,7 @@ package ua.sourceit.ishop.controller;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.Parameter;
 import com.restfb.Version;
 import com.restfb.types.User;
 import org.apache.log4j.Logger;
@@ -50,7 +51,7 @@ public class FacebookController implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         fbReferrer = "https://graph.facebook.com/oauth/authorize?client_id=" + facebookClientId +
-                "&redirect_uri=http://" + applicationHost + "/fromfb" + "&scope=email,public_profile";
+                "&redirect_uri=http://" + applicationHost + "/fromfb" + "&scope=email";
     }
 
     @RequestMapping(value={"/fbLogin", "/fbSignup"}, method={RequestMethod.GET})
@@ -103,7 +104,10 @@ public class FacebookController implements InitializingBean {
             String[] auth1 = out.split("=");
             String[] auth2 = auth1[1].split("&");
             FacebookClient facebookClient = new DefaultFacebookClient(auth2[0], Version.VERSION_2_4);
+
             User user = facebookClient.fetchObject("me", User.class);
+            User userWithEmail = facebookClient.fetchObject("me", User.class, Parameter.with("fields", "email"));
+            user.setEmail(userWithEmail.getEmail());
             return user;
         }
     }
