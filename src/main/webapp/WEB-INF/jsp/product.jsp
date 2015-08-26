@@ -679,7 +679,7 @@
                                         <label class="label">Gender<span class="prd-tab-colon">:</span></label>
 
                                         <div class="attribute-data">
-                                            <span class="data">${watch.gender}</span>
+                                            <span class="data">${watch.gender.name}</span>
                                         </div>
                                     </li>
                                     <li class="last odd">

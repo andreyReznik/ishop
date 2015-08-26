@@ -1113,7 +1113,9 @@ a.tcapiScButton {
 
             <sec:authorize access="isAnonymous()">
                 <div class="social-media-icons">
-                    <a class="footer-face-book-ic" href="/fbLogin" target="_blank"></a>
+                        <a href="/fbLogin">
+                            <img src="http://i.stack.imgur.com/ZW4QC.png" style="cursor:pointer"  alt="enter image description here">
+                        </a>
                 </div>
             </sec:authorize>
             <script type="text/javascript">

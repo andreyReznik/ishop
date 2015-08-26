@@ -13,8 +13,12 @@
             </td>
         </tr>
         <tr>
-            <td><span class="social-media-icons">
-            <a class="footer-face-book-ic" href="/fbLogin" target="_blank"></a></span>
+            <td>
+                <span class="social-media-icons">
+                <a href="/fbLogin">
+                <img src="http://i.stack.imgur.com/ZW4QC.png" style="cursor:pointer" href="/fbLogin" alt="enter image description here">
+                    </a>
+                </span>
             </td>
         </tr>
     </table>

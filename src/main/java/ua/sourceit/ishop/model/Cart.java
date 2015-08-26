@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Cart implements Serializable {
 
-    private Map<Watch, Integer> watchList;
+    private final Map<Watch, Integer> watchList;
 
     public Cart() {
         this.watchList = new HashMap<>();
@@ -42,10 +42,6 @@ public class Cart implements Serializable {
 
     public Map<Watch, Integer> getWatchList() {
         return watchList;
-    }
-
-    public void setWatchList(Map<Watch, Integer> watchList) {
-        this.watchList = watchList;
     }
 
     public void updateWatchQuantity(Watch watch, int newQty) {
