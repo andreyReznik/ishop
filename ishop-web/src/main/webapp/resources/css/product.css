@@ -1,0 +1,28 @@
+.MagicZoomPlusStyle{
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    outline: 0px;
+    overflow: hidden;
+    margin: auto;
+    width: auto;
+    height: auto;
+}
+
+
+.MagicToolboxContainerStyle{
+    max-width: 490px;
+}
+
+.MagicThumb-swap{
+   outline: none;
+   display: inline-block;
+}
+
+.magiczoomplusImg{
+    display: none !important;
+}
+
+.collateral-tabs-style{
+    height: 973px;
+}
