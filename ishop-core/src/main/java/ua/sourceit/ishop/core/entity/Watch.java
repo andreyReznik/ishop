@@ -32,7 +32,7 @@ public class Watch extends Thing  {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "id_brand", nullable = false)
+    @JoinColumn(name = "id_brand",nullable = false)
     public Brand getBrand() {
         return brand;
     }

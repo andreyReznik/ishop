@@ -31,13 +31,21 @@ public interface WatchDao {
 
     /**
      * Save new Watch
+     *
      * @param watch  Watch for saving
-     * @param brandId  id brand
-     * @param genderId  id gender
-     * @param movementId   id movement
-     * @return  watch saved id
      */
-    public int save(Watch watch, int brandId, int genderId, int movementId);
+    public int save(Watch watch);
 
+    /**
+     * Delete watch
+     * @param watch
+     * @return
+     */
+    void delete(Watch watch);
 
+    /**
+     * Update watch by ID
+     * @param watch
+     */
+    void update(Watch watch);
 }

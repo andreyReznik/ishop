@@ -5,8 +5,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-
-
 <form action="/loginHandler" method="post" id="login-form">
     <div class="fieldset">
         <div class="col2-set">
@@ -49,8 +47,6 @@
                         </c:if>
                     </li>
                 </ul>
-
-
             </div>
         </div>
     </div>

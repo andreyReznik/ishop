@@ -1,6 +1,10 @@
 package ua.sourceit.ishop.web.util;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.validation.BindingResult;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.ValidationException;
 
 /**
  * Work with request parameters
@@ -18,7 +22,7 @@ public class RequestUtil {
      */
     public static ProductsBound getProductBounds(String param) {
         int pageNum;
-        if ((param == null) || ("".equals(param))) {
+        if (StringUtils.isBlank(param)) {
             return new ProductsBound(0, 20);
         } else {
             pageNum = Integer.parseInt(param);
@@ -68,5 +72,24 @@ public class RequestUtil {
             ipAddress = request.getRemoteAddr();
         }
         return ipAddress;
+    }
+
+    public static ProductsBound getProductBounds(String offset, String limit) {
+        int offsetInt;
+        int limitInt;
+        try {
+            offsetInt = Integer.valueOf(offset);
+            limitInt = Integer.valueOf(limit);
+        } catch (NumberFormatException ex){
+            return null;
+        }
+        return new ProductsBound(offsetInt,limitInt);
+    }
+
+    public static void checkRequestParameters(BindingResult result) throws ValidationException {
+        if (result.hasErrors()){
+            throw new ValidationException("Bad request parameters!");
+        }
+
     }
 }

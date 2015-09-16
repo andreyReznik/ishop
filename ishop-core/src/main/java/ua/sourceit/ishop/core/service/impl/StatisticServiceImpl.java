@@ -1,5 +1,6 @@
 package ua.sourceit.ishop.core.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,11 +63,11 @@ public class StatisticServiceImpl implements StatisticService {
         if (date == null)
             throw new NullPointerException("date is null!");
 
-        if ((ip == null)||("".equals(ip))){
+        if (StringUtils.isBlank(ip)){
             throw new NullPointerException("ip is null or empty!");
         }
 
-        if ((url == null)||("".equals(url))){
+        if (StringUtils.isBlank(url)){
             throw new NullPointerException("url is null or empty!");
         }
     }

@@ -2,6 +2,7 @@ package ua.sourceit.ishop.core.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -21,6 +22,7 @@ public abstract class Thing implements Serializable {
     private boolean active;
 
     @Column(name="created", nullable = false)
+    @JsonIgnore
     public Timestamp getCreated() {
         return created;
     }
@@ -30,6 +32,7 @@ public abstract class Thing implements Serializable {
     }
 
     @Column(name="updated")
+    @JsonIgnore
     public Timestamp getUpdated() {
         return updated;
     }
@@ -49,7 +52,8 @@ public abstract class Thing implements Serializable {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public Thing setActive(boolean active) {
         this.active = active;
+        return this;
     }
 }

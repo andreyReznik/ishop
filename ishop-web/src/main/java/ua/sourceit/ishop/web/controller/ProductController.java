@@ -83,7 +83,7 @@ public class ProductController {
         if (watch != null){
             cart.addWatch(watch, 1);
             addMiniCartInfo(cart,modelMap);
-            return  "fragment/miniCart";
+            return  "fragment/mini-cart";
         }
         throw new ItemNotFoundException("product with id="+productId+" not found!");
     }
@@ -108,7 +108,7 @@ public class ProductController {
     @RequestMapping(value="/cart/view", method = RequestMethod.GET)
     public String viewCart(ModelMap modelMap, Cart cart) {
         addMiniCartInfo(cart, modelMap);
-        return  "shopBag";
+        return  "shop-bag";
     }
 
     @RequestMapping(value="/order/create", method = RequestMethod.GET)
@@ -120,12 +120,12 @@ public class ProductController {
         status.setComplete();
         modelMap.remove("cart");
         modelMap.put("email",user.getEmail());
-        return  "orderSent";
+        return  "order-sent";
     }
 
     @RequestMapping(value="/notImpl")
     public String notImplemented() {
-        return "notImpl";
+        return "not-impl";
     }
 
     private void addMiniCartInfo(final Cart cart, final ModelMap modelMap){

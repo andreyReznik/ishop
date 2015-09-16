@@ -6,7 +6,6 @@ import com.restfb.Parameter;
 import com.restfb.Version;
 import com.restfb.types.User;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,7 @@ import ua.sourceit.ishop.web.security.SecurityUtils;
 import ua.sourceit.ishop.core.service.UserService;
 import ua.sourceit.ishop.web.util.ApplicationConstant;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +30,7 @@ import java.util.Scanner;
  */
 
 @Controller
-public class FacebookController implements InitializingBean {
+public class FacebookController  {
 
     private static final Logger LOGGER = Logger.getLogger(FacebookController.class);
 
@@ -48,7 +48,7 @@ public class FacebookController implements InitializingBean {
 
     private String fbReferrer;
 
-    @Override
+    @PostConstruct
     public void afterPropertiesSet() throws Exception {
         fbReferrer = "https://graph.facebook.com/oauth/authorize?client_id=" + facebookClientId +
                 "&redirect_uri=http://" + applicationHost + "/fromfb" + "&scope=email";

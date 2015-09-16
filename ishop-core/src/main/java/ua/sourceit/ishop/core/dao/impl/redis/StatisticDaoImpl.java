@@ -1,4 +1,4 @@
-package ua.sourceit.ishop.core.dao.impl;
+package ua.sourceit.ishop.core.dao.impl.redis;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

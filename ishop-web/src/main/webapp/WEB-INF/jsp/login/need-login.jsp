@@ -16,7 +16,7 @@
             <td>
                 <span class="social-media-icons">
                 <a href="/fbLogin">
-                <img src="http://i.stack.imgur.com/LKMP7.png" width="70" height="36" style="cursor:pointer" href="/fbLogin" alt="enter image description here">
+                <img src="${ctx}/img/fb-login.png" class="facebook-login-button" alt="facebook login icon" href="/fbLogin" >
                     </a>
                 </span>
             </td>

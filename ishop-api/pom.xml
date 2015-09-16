@@ -15,17 +15,14 @@
         <spring.version>3.2.2.RELEASE</spring.version>
         <junit.version>4.8.2</junit.version>
         <javax.servlet.version>2.5</javax.servlet.version>
-        <jackson.version>1.9.10</jackson.version>
         <mockito.version>1.9.5</mockito.version>
         <javax.validation.version>1.0.0.GA</javax.validation.version>
         <opensymphony.version>2.4.2</opensymphony.version>
+        <swagger.springmvc.version>0.6.5</swagger.springmvc.version>
     </properties>
 
-
-
-
     <build>
-        <finalName>ROOT</finalName>
+        <finalName>api</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -78,23 +75,6 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Jackson JSON Mapper -->
-
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-asl</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-
-
-
         <!--Test-->
         <dependency>
             <groupId>junit</groupId>
@@ -113,7 +93,7 @@
         <dependency>
             <groupId>com.mangofactory</groupId>
             <artifactId>swagger-springmvc</artifactId>
-            <version>0.5.2</version>
+            <version>${swagger.springmvc.version}</version>
         </dependency>
 
     </dependencies>

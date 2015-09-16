@@ -14,9 +14,10 @@ import java.util.List;
  */
 @Repository("imageDao")
 public class ImageDaoImpl extends AbstractHibernateDao implements ImageDao {
+
     @Override
-    public void saveForProduct(int productId, List<WatchImage> images) {
-        throw new RuntimeException("Not implemented method");
+    public void save(WatchImage image) {
+        getSession().save(image);
     }
 
     @Override
@@ -27,5 +28,10 @@ public class ImageDaoImpl extends AbstractHibernateDao implements ImageDao {
                         .add(Restrictions.eq("watchId",watch.getId()))
                         .list();
         return watchImages;
+    }
+
+    @Override
+    public void delete(WatchImage watchImage) {
+        getSession().delete(watchImage);
     }
 }

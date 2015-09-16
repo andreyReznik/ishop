@@ -14,11 +14,10 @@ import java.util.List;
 public interface ImageDao {
 
     /**
-     * Save additional product images
-     * @param productId product id
-     * @param images list of WatchImages
+     * Save additional product image
+     * @param image for saving
      */
-    public void saveForProduct(int productId, List<WatchImage> images);
+    public void save(WatchImage image);
 
 
     /**
@@ -27,4 +26,10 @@ public interface ImageDao {
      * @return WatchImages list
      */
     List<WatchImage> getWatchImages(Watch watch);
+
+    /**
+     * Delete product image
+     * @param watchImage
+     */
+    void delete(WatchImage watchImage);
 }

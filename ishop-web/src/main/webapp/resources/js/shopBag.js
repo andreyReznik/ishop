@@ -19,7 +19,7 @@ jQuery("div.v-fix span").hide();
     })(jQuery);
 
 
-    function updateCart(qty_id, item_id, basePrice) {
+    function updateCart(qty_id, item_id) {
         jQuery('#ajax-loader').show();
         jQuery('#page-overlay').show();
         var qty_value = jQuery('#' + qty_id).val();
@@ -37,22 +37,22 @@ jQuery("div.v-fix span").hide();
         jQuery('#ajax-loader').hide();
         jQuery('#page-overlay').hide();
         if (jQuery('#bag-content')) {
-        jQuery('#bag-content').replaceWith(data);
+            jQuery('#bag-content').replaceWith(data);
         }
-    },
-    404: function (data) {
-        jQuery('#ajax-loader').hide();
-        jQuery('#page-overlay').hide();
-        alert('Item not found!');
-        }
-    },
-    error: function (data) {
-        jQuery('#ajax-loader').hide();
-        jQuery('#page-overlay').hide();
-        alert('Error occured. Try later.');
-        }
+        },
+        404: function (data) {
+            jQuery('#ajax-loader').hide();
+            jQuery('#page-overlay').hide();
+            alert('Item not found!');
+            }
+        },
+        error: function (data) {
+            jQuery('#ajax-loader').hide();
+            jQuery('#page-overlay').hide();
+            alert('Error occured. Try later.');
+            }
 
-    });
+        });
     }
     (function ($) {
         $(document).ready(function () {

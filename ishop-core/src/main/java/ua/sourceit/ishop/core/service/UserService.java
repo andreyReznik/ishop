@@ -20,7 +20,7 @@ public interface UserService {
 
     /**
      * Create new User after registration
-     * @param userDto   user registration object
+     * @param userDto   userDto object from registration form
      * @return  created ua.sourceit.ishop.core.entity.User
      * @exception ua.sourceit.ishop.core.exception.UserWithThisEmailAlreadyExists
      */

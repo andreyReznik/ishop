@@ -12,36 +12,25 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="brand")
-public class Brand implements AmountedProperty, Serializable {
+public class Brand extends DictionaryProperty implements AmountedProperty, Serializable {
 
-    private int id;
-    private String name;
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_brand", unique=true, nullable=false)
     public int getId() {
-        return id;
+        return super.getId();
     }
 
     @Column(name="name", nullable = false)
     public String getName() {
-        return name;
+        return super.getName();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Transient
     public int getAmount() {
         return 0;
     }
-
 
 }

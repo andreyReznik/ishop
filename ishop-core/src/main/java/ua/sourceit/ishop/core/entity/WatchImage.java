@@ -1,5 +1,7 @@
 package ua.sourceit.ishop.core.entity;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -12,7 +14,6 @@ import javax.persistence.*;
 public class WatchImage extends Thing  {
 
     private int id;
-//    private Watch watch;
     private int watchId;
     private String bigImage;
     private String smallImage;
@@ -20,6 +21,7 @@ public class WatchImage extends Thing  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_image", unique=true, nullable=false)
+    @JsonIgnore
     public int getId() {
         return id;
     }
@@ -44,6 +46,7 @@ public class WatchImage extends Thing  {
     }
 
     @Column(name="id_product", nullable=false)
+    @JsonIgnore
     public int getWatchId() {
         return watchId;
     }
@@ -51,15 +54,6 @@ public class WatchImage extends Thing  {
     public void setWatchId(int watchId) {
         this.watchId = watchId;
     }
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_product", nullable = false)
-//    public Watch getWatch() {
-//        return watch;
-//    }
-//    public void setWatch(Watch watch) {
-//        this.watch = watch;
-//    }
 
     @Override
     public boolean equals(Object o) {

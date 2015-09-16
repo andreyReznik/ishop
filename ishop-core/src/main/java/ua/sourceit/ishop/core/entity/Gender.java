@@ -4,8 +4,6 @@ import ua.sourceit.ishop.core.model.AmountedProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Watch gender
@@ -13,30 +11,20 @@ import java.util.Set;
  */
 @Entity
 @Table(name="gender")
-public class Gender implements AmountedProperty, Serializable {
+public class Gender extends DictionaryProperty implements AmountedProperty, Serializable {
 
-    private int id;
-    private String name;
     private int amount;
-    private Set<Watch> watchSet = new HashSet<Watch>(0);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_gender", unique=true, nullable=false)
     public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+        return super.getId();
     }
 
     @Column(name="name", nullable = false)
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return super.getName();
     }
 
     @Override

@@ -26,13 +26,6 @@ public class ExceptionFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Throwable ex) {
             LOGGER.error("Detected error during processing request: " + ex.getMessage(), ex);
-            servletRequest.setAttribute("message", ex.getMessage());
-            Throwable cause = ex.getCause();
-            if (cause != null) {
-                servletRequest.setAttribute("cause", ex.getCause().getMessage());
-            } else {
-                servletRequest.setAttribute("cause", "No cause.");
-            }
             servletRequest.getRequestDispatcher("/WEB-INF/jsp/exception.jsp").forward(servletRequest, servletResponse);
         }
     }

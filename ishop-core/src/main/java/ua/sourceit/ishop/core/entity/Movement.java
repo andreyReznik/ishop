@@ -11,31 +11,20 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="movement")
-public class Movement implements AmountedProperty, Serializable {
+public class Movement extends DictionaryProperty implements AmountedProperty, Serializable {
 
-    private int id;
-    private String name;
     private int amount;
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_movement", unique=true, nullable=false)
     public int getId() {
-        return id;
+        return super.getId();
     }
 
     @Column(name="name", nullable = false)
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return super.getName();
     }
 
     @Override

@@ -12,17 +12,12 @@
 
     <import resource="core-app-context.xml" />
     <mvc:annotation-driven />
-
-
-
+    <mvc:resources mapping="/docs/**" location="/docs/"/>
+    <context:property-placeholder location="classpath:application.properties" />
 
     <context:component-scan base-package="ua.sourceit.ishop.api.controller"/>
     <context:component-scan base-package="ua.sourceit.ishop.api.filter"/>
     <context:component-scan base-package="ua.sourceit.ishop.api.exception"/>
 
-    <bean  class="com.mangofactory.swagger.configuration.DocumentationConfig">
-    </bean>
-
-
-
+    <bean id="documentationConfig" class="com.mangofactory.swagger.configuration.DocumentationConfig"/>
 </beans>

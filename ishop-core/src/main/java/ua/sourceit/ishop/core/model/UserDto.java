@@ -21,12 +21,10 @@ public class UserDto {
     @Email
     private String email;
 
-    @NotEmpty
-    @Size(min=4, max=10)
+    @Size(min=4, max=10, message = "password length must be between 4 and 10")
     private String password;
 
-    @NotEmpty
-    @Size(min=4, max=10)
+    @Size(min=4, max=10, message = "confirmPassword length must be between 4 and 10")
     private String confirmPassword;
 
     public String getFirstName() {

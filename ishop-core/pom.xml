@@ -9,6 +9,20 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
+
+    <build>
+        <finalName>ishop-core</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <properties>
         <dpcp.version>1.4</dpcp.version>
         <mySql.jdbc.version>5.1.6</mySql.jdbc.version>
@@ -28,6 +42,8 @@
         <restfb.version>1.14.0</restfb.version>
         <javax.validation.version>1.0.0.GA</javax.validation.version>
         <redis.version>2.7.3</redis.version>
+
+        <jackson.version>1.9.10</jackson.version>
     </properties>
 
 
@@ -119,6 +135,19 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache.common.lang.version}</version>
+        </dependency>
+
+        <!-- Jackson JSON Mapper -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!--Redis-->

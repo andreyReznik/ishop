@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     public User registerNewUser(UserDto userDto) {
         User iShopUser = userDao.findByEmail(userDto.getEmail());
         if (iShopUser != null){
-            throw new UserWithThisEmailAlreadyExists("A user with this email already exists!");
+            throw new UserWithThisEmailAlreadyExists("A user with this e-mail already exists!");
         }
         iShopUser = User.createWithUserRole(userDto.getFirstName(),userDto.getEmail(),userDto.getPassword());
         userDao.save(iShopUser);

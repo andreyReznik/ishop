@@ -28,7 +28,7 @@ public class GlobalExceptionController {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleException(Exception ex, HttpServletRequest req) {
-        LOGGER.error(ex.getMessage());
+        LOGGER.error(ex.getMessage(),ex);
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", ex);
         mav.addObject("url", req.getRequestURL());
