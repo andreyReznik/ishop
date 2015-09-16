@@ -40,5 +40,5 @@
 
 
 Ссылка на сайт <a href="http://52.17.236.173:8080">http://52.17.236.173:8080</a>
-Ссылка на swagger-ui для API <a href="http://52.17.236.173:8080/api/api-docs">http://52.17.236.173:8080/api/api-docs</a>
+Ссылка на swagger-ui для API <a href="http://52.17.236.173:8080/api/docs/api.html">http://52.17.236.173:8080/api/docs/api.html</a>
 Админ пользователь login: admin, пароль admin
