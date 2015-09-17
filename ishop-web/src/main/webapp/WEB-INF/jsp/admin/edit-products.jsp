@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="im" tagdir="/WEB-INF/tags" %>
 <div class="row">
 
     <div class="large-12 medium-12 columns">
@@ -71,7 +71,7 @@
             </div>
             <div class="row">
                 <div class="large-4 medium-4 columns">
-                    <img id="mainImage" class="mainImage"  src="" alt="">
+                    <im:img id="mainImage" classes="mainImage"  src="" alt="" />
                 </div>
                 <div class="large-8 medium-8 columns">
                     <div class="row">
@@ -83,7 +83,7 @@
                             <div class="large-2 medium-2 columns">
                                 <label>Small image</label>
                                 <input id="smallImageInput-${i}" type="file" accept="image/jpeg, image/png" placeholder="photo" />
-                                <img class="smallImage" id="smallImage-${i}" />
+                                <im:img classes="smallImage" id="smallImage-${i}" />
                             </div>
                         </c:forEach>
                     </div>
@@ -102,24 +102,26 @@
                             <input id="limit" type="text" value="20" />
                         </div>
                         <div class="large-4 medium-4 columns small">
-                            <a type="button" href="#" class="button small" onclick="adminOperationsHelper.getProducts('/admin/ajax/products')">refresh</a>
+                            <a type="button" href="#" class="button small" onclick="adminOperationsHelper.getProducts()">refresh</a>
                         </div>
                     </div>
                 </div>
                 <div class="large-6 medium-6 columns small">
                     <div class="row">
                         <div class="large-6 medium-6 columns">
-                            <a type="button" href="#" class="button small right" onclick="adminOperationsHelper.doAddOrUpdateNewProduct('/admin/product','PUT')">Update</a>
+                            <a type="button" href="#" class="button small right" onclick="adminOperationsHelper.doAddOrUpdateNewProduct('PUT')">Update</a>
                         </div>
                         <div class="large-6 medium-6 columns">
-                            <a type="button" href="#" class="button small right" onclick="adminOperationsHelper.doAddOrUpdateNewProduct('/admin/product','POST')">Add</a>
+                            <a type="button" href="#" class="button small right" onclick="adminOperationsHelper.doAddOrUpdateNewProduct('POST')">Add</a>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-        <h5>Products:</h5>
-        <jsp:include page="table-products.jsp"></jsp:include>
+        <div class="row">
+            <h5>Products:</h5>
+            <jsp:include page="table-products.jsp"></jsp:include>
+        </div>
     </div>
 </div>
 

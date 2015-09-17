@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -21,7 +20,7 @@ public class ImageServiceImplTest {
         ImageServiceImpl imageService = new ImageServiceImpl();
         imageService.setImagePath("/var/image/");
         String path = imageService.saveImageAndGetLink(BASE64_IMG);
-        File file = new File(path);
+        File file = new File("/var/image/"+path);
         if(!file.exists()){
             fail("file in "+path+" does not exist!");
         }

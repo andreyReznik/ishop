@@ -1,12 +1,12 @@
 var adminOperationsHelper  = {
-    getProductDataForEdit: function(url,productId){
-        $.getJSON(url+'?id='+productId,
+    getProductDataForEdit: function(productId){
+        $.getJSON('/admin/product?id='+productId,
             function(json) {
                 $("select#brand option").each(function() { this.selected = (this.text == json.brand); });
                 $("select#gender option").each(function() { this.selected = (this.text == json.gender); });
                 $("select#movement option").each(function() { this.selected = (this.text == json.movement); });
                 $("#active").prop('checked', json.active);
-                $("#mainImage").prop('src', json.mainImage);
+                $("#mainImage").prop('src', adminOperationsHelper.getImgLink(json.mainImage));
                 $("#id").val(json.id);
                 $("#info").val(json.info);
                 $("#details").val(json.details);
@@ -16,17 +16,17 @@ var adminOperationsHelper  = {
                     $(this).removeAttr("src");
                 });
                 $.each(json.watchImages,function(index,obj){
-                    $("#smallImage-"+index).prop('src',json.watchImages[index].bigImage);
+                    $("#smallImage-"+index).prop('src',adminOperationsHelper.getImgLink(json.watchImages[index].bigImage));
                 });
             }
         );
     },
 
-    getProducts : function (url){
+    getProducts : function (){
         var offset = $(":input#offset").val();
         var limit =$(":input#limit").val();
         $.ajax({
-            url :url+'?offset='+offset+'&limit='+limit,
+            url :'/admin/ajax/products?offset='+offset+'&limit='+limit,
             dataType: 'html',
             type: 'get',
             statusCode: {
@@ -46,15 +46,15 @@ var adminOperationsHelper  = {
         });
     },
 
-    deleteProduct: function(url, productId){
+    deleteProduct: function(productId){
         if  (confirm('Remove this item from database?')){
             $.ajax({
-                url :url+'?id='+productId,
+                url :'/admin/product?id='+productId,
                 dataType: 'text',
                 type: 'delete',
                 statusCode: {
                     200: function (data) {
-                        adminOperationsHelper.getProducts('/admin/products');
+                        adminOperationsHelper.getProducts();
                     },
                     404: function (data) {
                         alert(data);
@@ -97,9 +97,9 @@ var adminOperationsHelper  = {
         }
     },
 
-    doAddOrUpdateNewProduct: function(url,type){
+    doAddOrUpdateNewProduct: function(type){
         $.ajax({
-                url:url,
+                url:'/admin/product',
                 type: type,
                 data: JSON.stringify(adminOperationsHelper.getProductFromForm() ),
                 dataType: 'text',
@@ -127,6 +127,13 @@ var adminOperationsHelper  = {
             reader.readAsDataURL(input.files[0]);
         }
 
+    },
+
+    getImgLink: function (imgLink){
+        if (imgLink.indexOf('http://') >= 0){
+            return imgLink;
+        }
+        return '/image/'+imgLink;
     },
     onError : function(data){
         alert('Operation failed. Reason:'+data.responseText);

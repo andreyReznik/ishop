@@ -1,10 +1,14 @@
 package ua.sourceit.ishop.web.controller;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,8 +22,12 @@ import ua.sourceit.ishop.web.security.SecurityUtils;
 import ua.sourceit.ishop.web.util.ApplicationConstant;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +38,11 @@ import java.util.Map;
 
 @Controller
 public class CommonController {
+
+    private static final Logger LOGGER = Logger.getLogger(CommonController.class);
+
+    @Value("${image.path}")
+    private String imgPath;
 
     private final Map<UserRole,String> redirects = new HashMap<UserRole,String>();
 
@@ -86,5 +99,17 @@ public class CommonController {
         session.setAttribute(ApplicationConstant.NEED_REDIRECT_AFTER_LOGIN_URL, "/product/order/create");
         return  "login/need-login";
     }
+
+    @RequestMapping(value="/image/{imgName}")
+    public void getImage(@PathVariable("imgName")String imageName, HttpServletResponse resp) {
+        try {
+            try(InputStream inputStream = new FileInputStream(imgPath+imageName+".jpg");){
+                IOUtils.copy(inputStream,resp.getOutputStream());
+            }
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(),e);
+        }
+    }
+
 
 }

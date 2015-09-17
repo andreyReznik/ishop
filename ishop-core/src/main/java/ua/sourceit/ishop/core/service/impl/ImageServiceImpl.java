@@ -42,7 +42,7 @@ public class ImageServiceImpl implements ImageService {
 
         String smallImage = watchImage.getSmallImage();
         if (smallImage.contains("base64")){
-            //TODO convert big img to 70x70
+            //TODO convert small img to 70x70
             smallImage = saveImageAndGetLink(smallImage);
             watchImage.setSmallImage(smallImage);
         }
@@ -71,9 +71,10 @@ public class ImageServiceImpl implements ImageService {
             String imageDataBytes = base64.substring(base64.indexOf(",")+1);
             String extension = getExtension(base64);
             byte[] btDataFile = new sun.misc.BASE64Decoder().decodeBuffer(imageDataBytes);
-            String imageFullPath = imagePath+ UUID.randomUUID().toString()+ "."+extension;
+            String fileName = UUID.randomUUID().toString()+"."+extension;
+            String imageFullPath = imagePath+fileName;
             saveImageFile(btDataFile,imageFullPath);
-            return imageFullPath;
+            return fileName;
         }
         return  base64;
     }
