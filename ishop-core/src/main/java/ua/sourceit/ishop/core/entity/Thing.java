@@ -56,4 +56,6 @@ public abstract class Thing implements Serializable {
         this.active = active;
         return this;
     }
+
+
 }

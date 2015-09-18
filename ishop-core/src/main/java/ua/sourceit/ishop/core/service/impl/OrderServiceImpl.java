@@ -7,12 +7,15 @@ import org.springframework.transaction.support.TransactionSynchronizationAdapter
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import ua.sourceit.ishop.core.dao.OrderDao;
 import ua.sourceit.ishop.core.dao.OrderProductDao;
-import ua.sourceit.ishop.core.dao.UserDao;
 import ua.sourceit.ishop.core.entity.Order;
+import ua.sourceit.ishop.core.entity.OrderProduct;
 import ua.sourceit.ishop.core.entity.User;
+import ua.sourceit.ishop.core.exception.CartIsEmptyException;
 import ua.sourceit.ishop.core.model.Cart;
 import ua.sourceit.ishop.core.service.EmailService;
 import ua.sourceit.ishop.core.service.OrderService;
+
+import java.util.List;
 
 /**
  * @author: areznik
@@ -20,11 +23,11 @@ import ua.sourceit.ishop.core.service.OrderService;
 @Service("orderService")
 public class OrderServiceImpl implements OrderService{
 
-    @Autowired
-    private OrderDao orderDao;
+
+    public static final String CART_IS_EMPTY_TEXT = "Your cart is empty!";
 
     @Autowired
-    private UserDao userDao;
+    private OrderDao orderDao;
 
     @Autowired
     private OrderProductDao orderProductDao;
@@ -35,8 +38,12 @@ public class OrderServiceImpl implements OrderService{
     @Override
     @Transactional()
     public int createOrder(final Cart cart, final User user) {
+        List<OrderProduct> orderProducts = cart.getOrderProducts();
+        if (orderProducts.size() == 0){
+            throw new CartIsEmptyException(CART_IS_EMPTY_TEXT);
+        }
         final Order order = new Order();
-        order.setOrderProducts(cart.getOrderProducts());
+        order.setOrderProducts(orderProducts);
         order.setUserId(user.getId());
         int orderNum = orderDao.save(order);
         orderProductDao.save(order);

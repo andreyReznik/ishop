@@ -52,4 +52,28 @@ public class OrderProduct implements Serializable {
     public void setWatchId(int watchId) {
         this.watchId = watchId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OrderProduct)) return false;
+
+        OrderProduct that = (OrderProduct) o;
+
+        if (count != that.count) return false;
+        if (id != that.id) return false;
+        if (orderId != that.orderId) return false;
+        if (watchId != that.watchId) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + orderId;
+        result = 31 * result + watchId;
+        result = 31 * result + count;
+        return result;
+    }
 }

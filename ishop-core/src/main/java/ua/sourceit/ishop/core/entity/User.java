@@ -99,15 +99,21 @@ public class User extends Thing {
         this.role = role;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (!(o instanceof User)) return false;
 
         User user = (User) o;
 
         if (id != user.id) return false;
+        if (!email.equals(user.email)) return false;
+        if (!login.equals(user.login)) return false;
+        if (!name.equals(user.name)) return false;
+        if (!pass.equals(user.pass)) return false;
+        if (!phone.equals(user.phone)) return false;
+        if (role != user.role) return false;
 
         return true;
     }

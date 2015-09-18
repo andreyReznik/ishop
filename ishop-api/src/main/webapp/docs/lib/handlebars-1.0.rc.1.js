@@ -1267,7 +1267,7 @@ Handlebars.JavaScriptCompiler = function() {};
         this.source[1] = this.source[1] + ", " + locals.join(", ");
       }
 
-      // Generate minimizer alias mappings
+      // GenerateUUID minimizer alias mappings
       if (!this.isChild) {
         var aliases = [];
         for (var alias in this.context.aliases) {

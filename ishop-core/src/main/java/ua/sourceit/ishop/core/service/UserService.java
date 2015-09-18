@@ -11,6 +11,7 @@ import ua.sourceit.ishop.core.model.UserDto;
 
 public interface UserService {
 
+
     /**
      * Create new user after success facebook authenticate
      * @param user  facebook user object

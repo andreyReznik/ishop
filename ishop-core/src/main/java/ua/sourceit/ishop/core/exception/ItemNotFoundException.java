@@ -5,7 +5,7 @@ package ua.sourceit.ishop.core.exception;
  * @author: areznik
  */
 
-public class ItemNotFoundException extends RuntimeException {
+public class ItemNotFoundException extends IShopException {
     public ItemNotFoundException(String message) {
         super(message);
     }

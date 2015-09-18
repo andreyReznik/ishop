@@ -4,12 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
-import ua.sourceit.ishop.core.component.RedisSource;
 import ua.sourceit.ishop.core.dao.StatisticDao;
 import ua.sourceit.ishop.core.model.statistic.VisitedResource;
 import ua.sourceit.ishop.core.service.StatisticService;
-import ua.sourceit.ishop.core.util.DateUtil;
 
 import java.util.Date;
 import java.util.HashSet;

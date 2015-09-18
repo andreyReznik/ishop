@@ -12,10 +12,7 @@ import ua.sourceit.ishop.core.service.EmailService;
 import javax.annotation.PreDestroy;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author: areznik
@@ -25,6 +22,8 @@ public class EmailServiceImpl implements EmailService {
 
     private static final Logger LOGGER = Logger.getLogger(EmailServiceImpl.class);
 
+    public static final String YOUR_ORDER_NUM_TEXT = "Your order num: ";
+
     private final ExecutorService executorService = new ThreadPoolExecutor(2, 5,
                                                     60L, TimeUnit.SECONDS,
                                                     new SynchronousQueue<Runnable>());
@@ -33,24 +32,25 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSender mailSender;
 
     @Override
-    public void sendOrderAsync(final Order order, final User user) {
-        executorService.submit(new Runnable() {
+    public Future<MimeMessageHelper> sendOrderAsync(final Order order, final User user) {
+        return executorService.submit(new Callable<MimeMessageHelper>() {
             @Override
-            public void run() {
+            public MimeMessageHelper call() throws Exception {
                 MimeMessage message = mailSender.createMimeMessage();
                 try {
                     MimeMessageHelper helper = new MimeMessageHelper(message, true);
                     helper.setFrom("a.reznik.developer@gmail.com");
                     helper.setTo(user.getEmail());
                     helper.setSubject("ishop");
-                    helper.setText("Your order num: "+order.getId(), false);
+                    helper.setText(YOUR_ORDER_NUM_TEXT + order.getId(), false);
                     mailSender.send(message);
+                    return helper;
                 } catch (MessagingException e) {
                     LOGGER.error(e.getMessage());
                     throw new RuntimeException(e.getMessage(), e);
                 }
             }
-        });
+        } );
     }
 
     @PreDestroy

@@ -24,6 +24,7 @@ import java.util.UUID;
 @Service
 public class ImageServiceImpl implements ImageService {
 
+    private static final CharSequence BASE64_STRING = "base64";
     @Value("${image.path}")
     private String imagePath;
 
@@ -34,14 +35,14 @@ public class ImageServiceImpl implements ImageService {
     public void saveImage(ImageDto imageDto) throws IOException {
         WatchImage watchImage = DtoConverter.getWatchImage(imageDto);
         String bigImage = watchImage.getBigImage();
-        if (bigImage.contains("base64")){
+        if (bigImage.contains(BASE64_STRING)){
             //TODO convert big img to 490x490
             bigImage = saveImageAndGetLink(bigImage);
             watchImage.setBigImage(bigImage);
         }
 
         String smallImage = watchImage.getSmallImage();
-        if (smallImage.contains("base64")){
+        if (smallImage.contains(BASE64_STRING)){
             //TODO convert small img to 70x70
             smallImage = saveImageAndGetLink(smallImage);
             watchImage.setSmallImage(smallImage);
@@ -56,18 +57,9 @@ public class ImageServiceImpl implements ImageService {
         deleteImageFromDisk(image.getSmallImage());
     }
 
-    private void deleteImageFromDisk(String path){
-        if (!path.contains("http")){
-            File file = new File(path);
-            if(file.exists()){
-                file.delete();
-            }
-        }
-    }
-
     @Override
     public String saveImageAndGetLink(String base64) throws IOException {
-        if (base64.contains("base64")){
+        if (base64.contains(BASE64_STRING)){
             String imageDataBytes = base64.substring(base64.indexOf(",")+1);
             String extension = getExtension(base64);
             byte[] btDataFile = new sun.misc.BASE64Decoder().decodeBuffer(imageDataBytes);
@@ -100,7 +92,13 @@ public class ImageServiceImpl implements ImageService {
         return "jpg";
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    private void deleteImageFromDisk(String path){
+        if (!path.contains("http")){
+            File file = new File(path);
+            if(file.exists()){
+                file.delete();
+            }
+        }
     }
+
 }

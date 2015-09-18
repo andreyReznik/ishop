@@ -61,4 +61,26 @@ public class Order implements Serializable {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+
+        Order order = (Order) o;
+
+        if (id != order.id) return false;
+        if (userId != order.userId) return false;
+        if (!orderProducts.equals(order.orderProducts)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + userId;
+        result = 31 * result + orderProducts.hashCode();
+        return result;
+    }
 }

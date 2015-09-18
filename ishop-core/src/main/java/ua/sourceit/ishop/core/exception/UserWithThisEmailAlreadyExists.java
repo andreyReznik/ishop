@@ -5,7 +5,7 @@ package ua.sourceit.ishop.core.exception;
  * @author: areznik
  */
 
-public class UserWithThisEmailAlreadyExists extends RuntimeException {
+public class UserWithThisEmailAlreadyExists extends IShopException {
     public UserWithThisEmailAlreadyExists(String message) {
         super(message);
     }
