@@ -1,10 +1,9 @@
 package ua.sourceit.ishop.core.dao.impl.hibernate;
 
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import ua.sourceit.ishop.core.dao.DictionaryDao;
-import ua.sourceit.ishop.core.entity.*;
+import ua.sourceit.ishop.core.entity.DictionaryProperty;
 
 import java.util.List;
 
@@ -12,6 +11,7 @@ import java.util.List;
  * @author: areznik
  */
 @Repository("dictionaryDao")
+@SuppressWarnings("unchecked")
 public class DictionaryDaoImpl extends AbstractHibernateDao implements DictionaryDao {
 
     @Override

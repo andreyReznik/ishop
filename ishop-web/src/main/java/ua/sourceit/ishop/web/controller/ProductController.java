@@ -1,7 +1,6 @@
 package ua.sourceit.ishop.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +9,7 @@ import ua.sourceit.ishop.core.entity.*;
 import ua.sourceit.ishop.core.exception.ItemNotFoundException;
 import ua.sourceit.ishop.core.model.AmountedProperty;
 import ua.sourceit.ishop.core.model.Cart;
+import ua.sourceit.ishop.core.model.statistic.VisitedItem;
 import ua.sourceit.ishop.core.service.*;
 import ua.sourceit.ishop.web.security.SecurityUtils;
 import ua.sourceit.ishop.web.util.ProductsBound;
@@ -48,7 +48,7 @@ public class ProductController {
     @RequestMapping(value="/all")
     public String showAll(@RequestParam(value = "p", defaultValue = "") String pageId,Cart cart,
                                ModelMap model, HttpServletRequest request) {
-        statisticService.saveUserVisitedData(new Date(),RequestUtil.getClientIp(request),"/all");
+        statisticService.saveUserVisitedDataAsync(new VisitedItem(RequestUtil.getClientIp(request), "/all"));
         addMiniCartInfo(cart, model);
         ProductsBound productsBound = RequestUtil.getProductBounds(pageId);
         List<Watch> watches = productService.getWatchesByRange(productsBound.getOffset(),
@@ -68,7 +68,7 @@ public class ProductController {
 
     @RequestMapping(value="/view/{productId}")
     public String viewOne(@PathVariable("productId") int productId, Cart cart, ModelMap modelMap, HttpServletRequest request) {
-        statisticService.saveUserVisitedData(new Date(),RequestUtil.getClientIp(request),"/"+String.valueOf(productId));
+        statisticService.saveUserVisitedDataAsync(new VisitedItem(RequestUtil.getClientIp(request), "/" + String.valueOf(productId)));
         addMiniCartInfo(cart, modelMap);
         Watch watch = productService.getWatchById(productId);
         if (watch != null){
@@ -115,7 +115,7 @@ public class ProductController {
 
     @RequestMapping(value="/order/create", method = RequestMethod.GET)
     public String createOrder(ModelMap modelMap, Cart cart, SessionStatus status, HttpServletRequest request) {
-        statisticService.saveUserVisitedData(new Date(),RequestUtil.getClientIp(request),"/order/create");
+        statisticService.saveUserVisitedDataAsync(new VisitedItem(RequestUtil.getClientIp(request), "/order/create"));
         addMiniCartInfo(cart, modelMap);
         User user = userService.getById(SecurityUtils.getCurrentIdAccount());
         orderService.createOrder(cart,user);

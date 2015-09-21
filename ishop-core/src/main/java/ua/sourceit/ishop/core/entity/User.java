@@ -22,18 +22,19 @@ public class User extends Thing {
     private String phone;
     private UserRole role;
 
+    public User(){
 
-    public static User createWithUserRole(String name, String email, String password){
-        User user = new User();
-        user.setLogin(email);
-        user.setPass(password);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhone("");
-        user.setRole(UserRole.USER_ROLE);
-        user.setCreated(new Timestamp(new Date().getTime()));
-        user.setActive(true);
-        return user;
+    }
+
+    public User(String name, String email, String password, UserRole userRole){
+        this.login = email;
+        this.pass = password;
+        this.name = name;
+        this.email = email;
+        this.phone = "";
+        this.role = userRole;
+        this.setCreated(new Timestamp(new Date().getTime()));
+        this.setActive(true);
     }
 
     @Id

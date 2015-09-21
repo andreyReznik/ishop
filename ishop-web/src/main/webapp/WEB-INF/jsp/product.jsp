@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<link rel="stylesheet" href="${ctx}/css/product.css">
+<link rel="stylesheet" href="${contextPath}/css/product.css">
 <div class="main col1-layout">
     <div class="col-main">
         <div class="product-view">
@@ -11,7 +11,7 @@
 <script type="text/javascript">
     decorateGeneric($$('#attribute-list-203 li'), ['odd', 'even', 'first', 'last']);
 </script>
-<script type="text/javascript" src="${ctx}/js/product.js"></script>
+<script type="text/javascript" src="${contextPath}/js/product.js"></script>
 
 
 

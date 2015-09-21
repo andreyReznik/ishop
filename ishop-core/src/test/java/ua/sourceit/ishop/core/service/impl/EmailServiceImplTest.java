@@ -28,7 +28,6 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(locations = { "/mail-bean.xml"})
 public class EmailServiceImplTest {
 
-
     @Autowired
     private JavaMailSender mailSender;
 
@@ -49,7 +48,6 @@ public class EmailServiceImplTest {
             MimeMessageHelper mimeMessageHelper = mimeMessageHelperFuture.get(1L, TimeUnit.SECONDS);
             verify(mailSenderMock,times(1)).createMimeMessage();
             verify(mailSenderMock,times(1)).send(mimeMessage);
-            System.out.println(mimeMessageHelper);
             String email = mimeMessageHelper.getMimeMessage().getRecipients(Message.RecipientType.TO)[0].toString();
             assertEquals(email,user.getEmail());
             String text = mimeMessageHelper.getMimeMultipart().getBodyPart(0).getContent().toString();
@@ -62,12 +60,11 @@ public class EmailServiceImplTest {
     @Test
     public void testDestroy() throws Exception {
         EmailServiceImpl emailService = new EmailServiceImpl();
-        ExecutorService executorService = mock(ExecutorService.class);
-        Field f = emailService.getClass().getDeclaredField("executorService");
-        f.setAccessible(true);
-        f.set(emailService, executorService);
-        f.setAccessible(false);
+        ExecutorService executorServiceMock = mock(ExecutorService.class);
+        ReflectionTestUtils.setField(emailService,"executorService",executorServiceMock);
+
         emailService.destroy();
-        verify(executorService).shutdown();
+
+        verify(executorServiceMock).shutdown();
     }
 }

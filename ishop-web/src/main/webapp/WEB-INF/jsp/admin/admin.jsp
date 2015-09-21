@@ -5,5 +5,8 @@
         <li>
             <a href="/admin/products/edit">Edit products</a>
         </li>
+        <li>
+            <a href="/admin/statistic">Show statistic</a>
+        </li>
     </ul>
 </div>

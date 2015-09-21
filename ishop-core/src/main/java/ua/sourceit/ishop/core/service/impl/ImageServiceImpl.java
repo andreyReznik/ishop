@@ -9,6 +9,7 @@ import ua.sourceit.ishop.core.entity.WatchImage;
 import ua.sourceit.ishop.core.model.DtoConverter;
 import ua.sourceit.ishop.core.model.ImageDto;
 import ua.sourceit.ishop.core.service.ImageService;
+import ua.sourceit.ishop.core.util.ImageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,17 +59,16 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public String saveImageAndGetLink(String base64) throws IOException {
-        if (base64.contains(BASE64_STRING)){
-            String imageDataBytes = base64.substring(base64.indexOf(",")+1);
-            String extension = getExtension(base64);
-            byte[] btDataFile = new sun.misc.BASE64Decoder().decodeBuffer(imageDataBytes);
-            String fileName = UUID.randomUUID().toString()+"."+extension;
+    public String saveImageAndGetLink(String base64str) throws IOException {
+        if (base64str.contains(BASE64_STRING)){
+            String extension = ImageUtil.getImageExtension(base64str);
+            String fileName = ImageUtil.getFileName(extension);
+            byte[] btDataFile = ImageUtil.getImageBytes(base64str);
             String imageFullPath = imagePath+fileName;
             saveImageFile(btDataFile,imageFullPath);
             return fileName;
         }
-        return  base64;
+        return  base64str;
     }
 
     @Override
@@ -80,16 +80,6 @@ public class ImageServiceImpl implements ImageService {
         Path path = Paths.get(aFileName);
         Files.createDirectories(path.getParent());
         Files.write(path, aBytes);
-    }
-
-    private String getExtension(String base64) {
-        int start = base64.indexOf("/")+1;
-        int end = base64.indexOf(";");
-        String substring = base64.substring(start, end);
-        if ("png".equals(substring)){
-            return "png";
-        }
-        return "jpg";
     }
 
     private void deleteImageFromDisk(String path){

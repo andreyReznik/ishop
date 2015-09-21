@@ -61,13 +61,13 @@
         <div class="branding">
             <div class="mob-chk-logo hidden-style">
                 <a href="/product/all" title="Watches" class="logo">
-                    <img src="${ctx}/img/mob-logo.png" alt="Watches">
+                    <img src="${contextPath}/img/mob-logo.png" alt="Watches">
                 </a>
             </div>
             <h2 class="logo">
                 <strong>Watches</strong>
                 <a href="/product/all" title="Watches" class="logo">
-                    <span><img title="Watches" src="${ctx}/img/logo.png" alt="Watches">
+                    <span><img title="Watches" src="${contextPath}/img/logo.png" alt="Watches">
                     </span>
                 </a>
             </h2>
@@ -79,7 +79,7 @@
             <sec:authorize access="isAnonymous()">
                 <div class="social-media-icons">
                     <a href="/fbLogin">
-                        <img src="${ctx}/img/fb-login.png" class="facebook-login-button" alt="facebook login icon">
+                        <img src="${contextPath}/img/fb-login.png" class="facebook-login-button" alt="facebook login icon">
                     </a>
                 </div>
             </sec:authorize>

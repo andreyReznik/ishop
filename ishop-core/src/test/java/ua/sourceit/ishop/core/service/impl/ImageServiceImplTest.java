@@ -33,8 +33,9 @@ public class ImageServiceImplTest {
         File file = new File("/var/image/"+path);
         if(!file.exists()){
             fail("file in "+path+" does not exists!");
+        }else{
+            file.delete();
         }
-        file.delete();
     }
 
     @Test

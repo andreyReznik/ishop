@@ -32,7 +32,7 @@
             <a href="#"
                onclick="adminOperationsHelper.getProductDataForEdit(${watch.id})"
                title="Edit">
-                <img src="${ctx}/img/edit.png" alt="edit" />
+                <img src="${contextPath}/img/edit.png" alt="edit" />
             </a>
         </td>
         <td class="a-center cart-item-remove last">

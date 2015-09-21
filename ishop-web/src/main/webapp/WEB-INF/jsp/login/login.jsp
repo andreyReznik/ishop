@@ -52,4 +52,4 @@
     </div>
 </form>
 
-<script type="text/javascript" src="${ctx}/js/login.js"></script>
+<script type="text/javascript" src="${contextPath}/js/login.js"></script>

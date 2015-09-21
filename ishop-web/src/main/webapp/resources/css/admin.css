@@ -13,6 +13,10 @@ button, .button {
     border-width: 2px;
 }
 
+.margin-left-1{
+    margin-left: 1px;
+}
+
 button:hover, button:focus, .button:hover, .button:focus {
     background-color: #ffffff;
     border-color: #000000;
@@ -55,4 +59,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .error{
 
+}
+
+.chart {
+    height: 300px;
+    width: 100%;
 }

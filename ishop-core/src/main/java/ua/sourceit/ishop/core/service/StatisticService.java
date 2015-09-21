@@ -1,5 +1,6 @@
 package ua.sourceit.ishop.core.service;
 
+import ua.sourceit.ishop.core.model.statistic.VisitedItem;
 import ua.sourceit.ishop.core.model.statistic.VisitedResource;
 
 import java.util.Date;
@@ -12,7 +13,16 @@ import java.util.Set;
 
 public interface StatisticService {
 
-    void saveUserVisitedData(Date date, String ip, String url );
+    /**
+     * save user visiting action
+     * @param visitedItem
+     */
+    void saveUserVisitedDataAsync(VisitedItem visitedItem);
 
+    /**
+     * Get user visiting resources
+     * @param date - date for statistic
+     * @return
+     */
     Set<VisitedResource> getVisitingStatistic(Date date);
 }

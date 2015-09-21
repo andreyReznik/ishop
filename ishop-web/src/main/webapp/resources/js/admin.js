@@ -69,10 +69,6 @@ var adminOperationsHelper  = {
         }
     },
 
-    changeProductActive: function(productId, value){
-
-    },
-
     getProductFromForm : function(){
         var smallImagesList = [];
         $( "input[id^='smallImage']" ).each(function(index){
@@ -129,6 +125,23 @@ var adminOperationsHelper  = {
 
     },
 
+    getStatistic : function(host,ver){
+        var date =  $(":input#date").val();
+        var url = 'http://'+host+'/api/'+ver+'/stats?date='+date;
+        $.getJSON(url,
+            function(json) {
+                if (json.length > 0){
+                    $("#chart-container").empty();
+                    $.each(json,function(index,obj){
+                        var idName = 'chartContainer-'+index;
+                        $("#chart-container").append($('<div>').addClass('chart').attr('id', idName));
+                        chartRenderer.render(idName,obj.ip,obj.visitedUrls);
+                    });
+                }
+            }
+        );
+    },
+
     getImgLink: function (imgLink){
         if (imgLink.indexOf('http://') >= 0){
             return imgLink;
@@ -140,6 +153,46 @@ var adminOperationsHelper  = {
     }
 }
 
+
+var chartRenderer ={
+    render : function(containerId, ip, dataPoints){
+
+        var jsonStr = JSON.stringify(dataPoints);
+        jsonStr = jsonStr.split("\"url\":").join("\"label\":");
+        jsonStr = jsonStr.split("\"count\":").join("\"y\":");
+        var json = jQuery.parseJSON(jsonStr);
+
+        var chart = new CanvasJS.Chart(containerId,
+            {
+                title:{
+                    text: "Visited resource statistic from ip "+ ip
+                },
+                animationEnabled: true,
+                axisY: {
+                    title: "count"
+                },
+                legend: {
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center"
+                },
+                theme: "theme2",
+                data: [
+
+                    {
+                        type: "column",
+                        showInLegend: true,
+                        legendMarkerColor: "white",
+                        legendText: "visited urls",
+                        dataPoints: json
+                    }
+                ]
+            });
+
+        chart.render();
+    }
+}
+
+
 $("#mainImageInput").change(function(){
     adminOperationsHelper.readUrl(this,'mainImage');
 });
@@ -148,6 +201,7 @@ $( "input[id^='smallImage']" ).each(function(index){
         adminOperationsHelper.readUrl(this,$(this).next().attr('id'));
     })
 });
+
 
 
 

@@ -65,10 +65,10 @@
                 <a class="jqLoad" href="/product/all/?p=2">LOAD MORE</a>
             </div>
             <div id="wait" class="loadingwait">
-                <img src="${ctx}/img/ajax-loader.gif" alt="Loading..">
+                <img src="${contextPath}/img/ajax-loader.gif" alt="Loading..">
             </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="${ctx}/js/list.js"></script>
+<script type="text/javascript" src="${contextPath}/js/list.js"></script>

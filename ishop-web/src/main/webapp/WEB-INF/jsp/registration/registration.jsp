@@ -53,4 +53,4 @@
         </div>
     </div>
 </form:form>
-<script type="text/javascript" src="${ctx}/js/registration.js"></script>
+<script type="text/javascript" src="${contextPath}/js/registration.js"></script>

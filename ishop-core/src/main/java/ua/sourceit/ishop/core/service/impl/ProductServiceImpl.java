@@ -9,7 +9,7 @@ import ua.sourceit.ishop.core.entity.*;
 import ua.sourceit.ishop.core.exception.ItemNotFoundException;
 import ua.sourceit.ishop.core.model.DtoConverter;
 import ua.sourceit.ishop.core.model.ImageDto;
-import ua.sourceit.ishop.core.model.WatchDto;
+import ua.sourceit.ishop.core.model.WatchForm;
 import ua.sourceit.ishop.core.service.ImageService;
 import ua.sourceit.ishop.core.service.ProductService;
 
@@ -48,10 +48,10 @@ class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional()
-    public int save(WatchDto watchDto) throws IOException {
-        Watch watch = getWatch(watchDto);
+    public int save(WatchForm watchForm) throws IOException {
+        Watch watch = getWatch(watchForm);
         int watchId = watchDao.save(watch);
-        saveSmallImages(watchId,watchDto);
+        saveSmallImages(watchId, watchForm);
         return watchId;
     }
 
@@ -70,15 +70,15 @@ class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional()
-    public void update(WatchDto watchDto) throws IOException {
-        Watch watch = getWatch(watchDto);
+    public void update(WatchForm watchForm) throws IOException {
+        Watch watch = getWatch(watchForm);
         watchDao.update(watch);
         deleteExistingImages(watch);
-        saveSmallImages(watch.getId(),watchDto);
+        saveSmallImages(watch.getId(), watchForm);
     }
 
-    private void saveSmallImages(int watchId, WatchDto watchDto) throws IOException {
-        for(String image : watchDto.getSmallImages()){
+    private void saveSmallImages(int watchId, WatchForm watchForm) throws IOException {
+        for(String image : watchForm.getSmallImages()){
             imageService.saveImage(new ImageDto(watchId, image));
         }
     }
@@ -90,12 +90,12 @@ class ProductServiceImpl implements ProductService {
         }
     }
 
-    private Watch getWatch(WatchDto watchDto) throws IOException {
-        Watch watch = DtoConverter.getWatch(watchDto);
-        watch.setMainImage(imageService.saveImageAndGetLink(watchDto.getMainImage()));
-        watch.setBrand((Brand) dictionaryDao.getProperty(Brand.class, watchDto.getBrandName()));
-        watch.setGender((Gender) dictionaryDao.getProperty(Gender.class, watchDto.getGenderName()));
-        watch.setMovement((Movement) dictionaryDao.getProperty(Movement.class, watchDto.getMovementName()));
+    private Watch getWatch(WatchForm watchForm) throws IOException {
+        Watch watch = DtoConverter.getWatch(watchForm);
+        watch.setMainImage(imageService.saveImageAndGetLink(watchForm.getMainImage()));
+        watch.setBrand((Brand) dictionaryDao.getProperty(Brand.class, watchForm.getBrandName()));
+        watch.setGender((Gender) dictionaryDao.getProperty(Gender.class, watchForm.getGenderName()));
+        watch.setMovement((Movement) dictionaryDao.getProperty(Movement.class, watchForm.getMovementName()));
         return watch;
     }
 

@@ -60,7 +60,7 @@
                     <td class="cart-item-view-name">
                         <div class="cart-item-view-image-special">
                             <h2 class="product-name">
-                                <a href="/product/view/$entry.key.id">${entry.key.info}</a>
+                                <a href="/product/view/${entry.key.id}">${entry.key.info}</a>
                             </h2>
                         </div>
                     </td>

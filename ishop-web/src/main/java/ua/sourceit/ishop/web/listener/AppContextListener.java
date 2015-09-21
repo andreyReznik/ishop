@@ -19,13 +19,13 @@ public class AppContextListener implements ServletContextListener {
 
 
     public static final String RESOURCES_NAME = "resources";
-    public static final String RESOURCES_ALIAS = "ctx";
+    public static final String CONTEXT_PATH = "contextPath";
 
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext sc = servletContextEvent.getServletContext();
-        sc.setAttribute(RESOURCES_ALIAS, sc.getContextPath() + "/" + RESOURCES_NAME);
+        sc.setAttribute(CONTEXT_PATH, sc.getContextPath() + "/" + RESOURCES_NAME);
         LOGGER.info("web context initialized");
     }
 

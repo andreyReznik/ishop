@@ -2,7 +2,7 @@ package ua.sourceit.ishop.core.service;
 
 
 import ua.sourceit.ishop.core.entity.User;
-import ua.sourceit.ishop.core.model.UserDto;
+import ua.sourceit.ishop.core.model.UserForm;
 
 /**
  * Operations with user
@@ -21,11 +21,11 @@ public interface UserService {
 
     /**
      * Create new User after registration
-     * @param userDto   userDto object from registration form
+     * @param userForm   userForm object from registration form
      * @return  created ua.sourceit.ishop.core.entity.User
      * @exception ua.sourceit.ishop.core.exception.UserWithThisEmailAlreadyExists
      */
-    User registerNewUser(UserDto userDto);
+    User registerNewUser(UserForm userForm);
 
     /**
      * Get user by Id

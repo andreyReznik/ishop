@@ -1,5 +1,8 @@
 package ua.sourceit.ishop.core.dao;
 
+import ua.sourceit.ishop.core.model.statistic.VisitedItem;
+import ua.sourceit.ishop.core.model.statistic.VisitedResource;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -9,52 +12,18 @@ import java.util.Set;
  */
 
 public interface StatisticDao {
-    /**
-     * Save client ip for date
-     * @param date visiting date
-     * @param ip   client ip
-     */
-    void  saveIp(Date date, String ip);
 
     /**
-     * save client url
-     * @param date  visiting date
-     * @param ip    client ip
-     * @param url   visited url
+     * Save visiting action
+     * @param visitedItem
      */
-    void  saveUrl(Date date, String ip, String url);
+    void saveUserVisiting(VisitedItem visitedItem);
 
     /**
-     * Increment resource visiting count
-     * @param date  visiting date
-     * @param ip    client ip
-     * @param url   visited url
+     *  get user visited resources
+     * @param date
+     * @return
      */
-    void  incUrlVisitingCount(Date date, String ip, String url);
-
-    /**
-     * Get clients ip for date
-     * @param date  visiting date
-     * @return  set of clients ip
-     */
-    Set<String>  getClientIpSet(Date date);
-
-    /**
-     * Get clients urls for date
-     * @param date  visiting date
-     * @param ip   client ip
-     * @return    set of visited urls
-     */
-    Set<String>  getClientUrlSet(Date date, String ip);
-
-
-    /**
-     * Get url visiting count
-     * @param date  visiting date
-     * @param ip    client ip
-     * @param url   visited url
-     * @return  visited count
-     */
-    int getUrlVisitingCount(Date date, String ip,String url);
+    Set<VisitedResource> getVisitingStatistic(Date date);
 
 }

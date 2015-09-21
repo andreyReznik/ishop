@@ -2,6 +2,7 @@ package ua.sourceit.ishop.core.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.util.Assert;
 import ua.sourceit.ishop.core.entity.OrderProduct;
 import ua.sourceit.ishop.core.entity.Watch;
 
@@ -18,6 +19,8 @@ import java.util.Map;
 
 public class Cart implements Serializable {
 
+    private static final String NULL_NOT_ALLOWED_ERROR = "Null watch is not allowed in cart!";
+
     private final Map<Watch, Integer> watchList;
 
     public Cart() {
@@ -25,7 +28,7 @@ public class Cart implements Serializable {
     }
 
     public void addWatch(Watch watch, int count) {
-        checkForNull(watch);
+        Assert.notNull(watch, NULL_NOT_ALLOWED_ERROR);
         if (watchList.containsKey(watch)) {
             Integer current = watchList.get(watch);
             watchList.put(watch, current + count);
@@ -45,13 +48,12 @@ public class Cart implements Serializable {
     }
 
     public void updateWatchQuantity(Watch watch, int newQty) {
-        checkForNull(watch);
+        Assert.notNull(watch, NULL_NOT_ALLOWED_ERROR);
         watchList.put(watch, newQty);
     }
 
-    private void checkForNull(Watch watch){
-        if (watch == null)
-            throw new NullPointerException("Null watch not allowed in cart!");
+    public boolean isEmpty(){
+        return watchList.isEmpty();
     }
 
     public List<OrderProduct> getOrderProducts(){

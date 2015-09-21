@@ -6,8 +6,9 @@ import org.springframework.test.util.ReflectionTestUtils;
 import ua.sourceit.ishop.core.component.PasswordGenerator;
 import ua.sourceit.ishop.core.dao.UserDao;
 import ua.sourceit.ishop.core.entity.User;
+import ua.sourceit.ishop.core.entity.UserRole;
 import ua.sourceit.ishop.core.exception.UserWithThisEmailAlreadyExists;
-import ua.sourceit.ishop.core.model.UserDto;
+import ua.sourceit.ishop.core.model.UserForm;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -62,7 +63,7 @@ public class UserServiceImplTest {
     @Test
     public void testAuthenticateFromFBWhenUserDoesNotExist() throws Exception {
 
-        User iShopUser = User.createWithUserRole(USER_NAME,EMAIL,PASS);
+        User iShopUser = new User(USER_NAME,EMAIL,PASS, UserRole.USER_ROLE);
         when(userDaoMock.findByEmail(anyString())).thenReturn(null);
         com.restfb.types.User fbUser = new com.restfb.types.User();
         fbUser.setEmail(EMAIL);
@@ -78,10 +79,10 @@ public class UserServiceImplTest {
     @Test
     public void testRegisterNewUserWhenUserExists() throws Exception {
         when(userDaoMock.findByEmail(EMAIL)).thenReturn(new User());
-        UserDto userDto = new UserDto();
-        userDto.setEmail(EMAIL);
+        UserForm userForm = new UserForm();
+        userForm.setEmail(EMAIL);
         try{
-            userService.registerNewUser(userDto);
+            userService.registerNewUser(userForm);
 
             fail("UserWithThisEmailAlreadyExists must be thrown!");
         }catch (UserWithThisEmailAlreadyExists ex){
@@ -92,14 +93,14 @@ public class UserServiceImplTest {
 
     @Test
     public void testRegisterNewUserWhenUserDoesNotExist() throws Exception {
-        User createdUser = User.createWithUserRole(USER_NAME, EMAIL, PASS);
+        User createdUser = new User(USER_NAME, EMAIL, PASS,UserRole.USER_ROLE);
         when(userDaoMock.findByEmail(EMAIL)).thenReturn(null);
-        UserDto userDto = new UserDto();
-        userDto.setEmail(EMAIL);
-        userDto.setFirstName(USER_NAME);
-        userDto.setPassword(PASS);
+        UserForm userForm = new UserForm();
+        userForm.setEmail(EMAIL);
+        userForm.setFirstName(USER_NAME);
+        userForm.setPassword(PASS);
 
-        User registeredUser = userService.registerNewUser(userDto);
+        User registeredUser = userService.registerNewUser(userForm);
 
         verify(userDaoMock,times(1)).findByEmail(EMAIL);
         verify(userDaoMock,times(1)).save(createdUser);

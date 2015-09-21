@@ -21229,7 +21229,6 @@ document.observe("dom:loaded", function () {
             console.log(nextUrl);
             $('.jqLoad').attr('href', nextUrl);
         } else {
-            console.log('hiding!');
             $('.jqLoad').hide();
         }
 

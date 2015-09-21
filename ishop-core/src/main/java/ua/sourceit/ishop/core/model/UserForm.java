@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
  */
 
 
-public class UserDto {
+public class UserForm {
 
     @NotEmpty
     private String firstName;

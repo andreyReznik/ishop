@@ -7,11 +7,11 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Watches</title>
-<link rel="stylesheet" type="text/css"  href="${ctx}/css/font.css"  media="all"    >
-<link rel="stylesheet" type="text/css"  href="${ctx}/css/style.css" media="all">
-<link rel="stylesheet" type="text/css"  href="${ctx}/css/adaptive.css" media="all" >
-<script type="text/javascript"  src="${ctx}/js/prototype.js"></script>
-<script type="text/javascript"  src="${ctx}/js/jquery.js"></script>
+<link rel="stylesheet" type="text/css"  href="${contextPath}/css/font.css"  media="all"    >
+<link rel="stylesheet" type="text/css"  href="${contextPath}/css/style.css" media="all">
+<link rel="stylesheet" type="text/css"  href="${contextPath}/css/adaptive.css" media="all" >
+<script type="text/javascript"  src="${contextPath}/js/prototype.js"></script>
+<script type="text/javascript"  src="${contextPath}/js/jquery.js"></script>
 </head>
 <body class="catalog-category-view categorypath- category-">
 <div class="wrapper">
@@ -25,7 +25,7 @@
                 <div class="footer-top"></div>
                 <div class="hidden-style" id="backtop">
                     <a href="javascript:void(0)" onclick="jQuery(window).scrollTop(0);" alt="Back to Top">
-                        <img src="${ctx}/img/scroll_up.png" alt="Back to Top">
+                        <img src="${contextPath}/img/scroll_up.png" alt="Back to Top">
                     </a>
                 </div>
             </div>
@@ -35,6 +35,6 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" src="${ctx}/js/template.js"></script>
+<script type="text/javascript" src="${contextPath}/js/template.js"></script>
 </html>
 

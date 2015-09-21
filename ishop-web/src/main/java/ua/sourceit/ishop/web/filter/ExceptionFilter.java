@@ -26,6 +26,7 @@ public class ExceptionFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Throwable ex) {
             LOGGER.error("Detected error during processing request: " + ex.getMessage(), ex);
+            servletRequest.setAttribute("error","Server is busy. Please try later.");
             servletRequest.getRequestDispatcher("/WEB-INF/jsp/exception.jsp").forward(servletRequest, servletResponse);
         }
     }

@@ -38,10 +38,10 @@ public class OrderServiceImpl implements OrderService{
     @Override
     @Transactional()
     public int createOrder(final Cart cart, final User user) {
-        List<OrderProduct> orderProducts = cart.getOrderProducts();
-        if (orderProducts.size() == 0){
+        if (cart.isEmpty()){
             throw new CartIsEmptyException(CART_IS_EMPTY_TEXT);
         }
+        List<OrderProduct> orderProducts = cart.getOrderProducts();
         final Order order = new Order();
         order.setOrderProducts(orderProducts);
         order.setUserId(user.getId());

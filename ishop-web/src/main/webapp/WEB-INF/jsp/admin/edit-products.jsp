@@ -74,7 +74,7 @@
                     <im:img id="mainImage" classes="mainImage"  src="" alt="" />
                 </div>
                 <div class="large-8 medium-8 columns">
-                    <div class="row">
+                    <div class="row margin-left-1">
                         <label>Main image</label>
                         <input id="mainImageInput" type="file" accept="image/jpeg, image/png" placeholder="photo" />
                     </div>

@@ -12,21 +12,21 @@ import java.util.List;
 
 public class DtoConverter {
 
-    public static Watch getWatch(WatchDto watchDto){
+    public static Watch getWatch(WatchForm watchForm){
 
         Watch watch = new Watch();
-        watch.setBrand(getBrand(watchDto.getBrandName()));
-        watch.setGender(getGender(watchDto.getGenderName()));
-        watch.setMovement(getMovement(watchDto.getMovementName()));
-        watch.setId(watchDto.getId());
-        watch.setActive(watchDto.isActive());
-        watch.setModel(watchDto.getModel());
-        watch.setInfo(watchDto.getInfo());
-        watch.setPrice(watchDto.getPrice());
-        watch.setDetails(watchDto.getDetails());
-        watch.setMainImage(watchDto.getMainImage());
+        watch.setBrand(getBrand(watchForm.getBrandName()));
+        watch.setGender(getGender(watchForm.getGenderName()));
+        watch.setMovement(getMovement(watchForm.getMovementName()));
+        watch.setId(watchForm.getId());
+        watch.setActive(watchForm.isActive());
+        watch.setModel(watchForm.getModel());
+        watch.setInfo(watchForm.getInfo());
+        watch.setPrice(watchForm.getPrice());
+        watch.setDetails(watchForm.getDetails());
+        watch.setMainImage(watchForm.getMainImage());
         List<WatchImage> watchImages = new LinkedList<>();
-        for (String img : watchDto.getSmallImages()){
+        for (String img : watchForm.getSmallImages()){
             WatchImage watchImage = new WatchImage();
             watchImage.setBigImage(img);
             watchImages.add(watchImage);

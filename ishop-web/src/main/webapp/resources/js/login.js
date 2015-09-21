@@ -16,4 +16,4 @@
                             Event.observe(element, 'click', showTooltip);
                         });
                     });
-                    //]]>
+

@@ -9,7 +9,7 @@ import ua.sourceit.ishop.core.entity.*;
 import ua.sourceit.ishop.core.exception.ItemNotFoundException;
 import ua.sourceit.ishop.core.model.DtoConverter;
 import ua.sourceit.ishop.core.model.ImageDto;
-import ua.sourceit.ishop.core.model.WatchDto;
+import ua.sourceit.ishop.core.model.WatchForm;
 import ua.sourceit.ishop.core.service.ImageService;
 import ua.sourceit.ishop.core.service.ProductService;
 
@@ -95,39 +95,39 @@ public class ProductServiceImplTest {
         initWatchDaoMock();
         initImageServiceDaoMock();
         initDictionaryDaoMock();
-        WatchDto watchDto = createWatchDto();
-        when(watchDaoMock.save(DtoConverter.getWatch(watchDto))).thenReturn(345);
+        WatchForm watchForm = createWatchDto();
+        when(watchDaoMock.save(DtoConverter.getWatch(watchForm))).thenReturn(345);
 
-        int saveId = productService.save(watchDto);
+        int saveId = productService.save(watchForm);
 
         assertEquals(saveId, 345);
-        verify(imageServiceMock,times(1)).saveImageAndGetLink(watchDto.getMainImage());
-        verify(dictionaryDaoMock,times(1)).getProperty(Brand.class, watchDto.getBrandName());
-        verify(dictionaryDaoMock,times(1)).getProperty(Gender.class, watchDto.getGenderName());
-        verify(dictionaryDaoMock,times(1)).getProperty(Movement.class, watchDto.getMovementName());
-        verify(watchDaoMock,times(1)).save(DtoConverter.getWatch(watchDto));
-        verify(imageServiceMock,times(1)).saveImage(new ImageDto(345, watchDto.getSmallImages().get(0)));
-        verify(imageServiceMock,times(1)).saveImage(new ImageDto(345, watchDto.getSmallImages().get(1)));
+        verify(imageServiceMock,times(1)).saveImageAndGetLink(watchForm.getMainImage());
+        verify(dictionaryDaoMock,times(1)).getProperty(Brand.class, watchForm.getBrandName());
+        verify(dictionaryDaoMock,times(1)).getProperty(Gender.class, watchForm.getGenderName());
+        verify(dictionaryDaoMock,times(1)).getProperty(Movement.class, watchForm.getMovementName());
+        verify(watchDaoMock,times(1)).save(DtoConverter.getWatch(watchForm));
+        verify(imageServiceMock,times(1)).saveImage(new ImageDto(345, watchForm.getSmallImages().get(0)));
+        verify(imageServiceMock,times(1)).saveImage(new ImageDto(345, watchForm.getSmallImages().get(1)));
     }
 
-    private WatchDto createWatchDto() {
+    private WatchForm createWatchDto() {
         String smallImg1 = "http://imageStorage/smallImg1-355.jpg";
         String smallImg2 = "http://imageStorage/smallImg2-355.jpg";
         String mainImg = "http://imageStorage/mainImg355.jpg";
 
 
-        WatchDto watchDto = new WatchDto();
-        watchDto.setId(355);
-        watchDto.setBrandName("Brand");
-        watchDto.setSmallImages(Arrays.asList(smallImg1,smallImg2));
-        watchDto.setMainImage(mainImg);
-        watchDto.setDetails("Details");
-        watchDto.setInfo("Info");
-        watchDto.setModel("Model");
-        watchDto.setMovementName("Movement");
-        watchDto.setPrice(BigDecimal.valueOf(2345));
-        watchDto.setGenderName("Gender");
-        return watchDto;
+        WatchForm watchForm = new WatchForm();
+        watchForm.setId(355);
+        watchForm.setBrandName("Brand");
+        watchForm.setSmallImages(Arrays.asList(smallImg1,smallImg2));
+        watchForm.setMainImage(mainImg);
+        watchForm.setDetails("Details");
+        watchForm.setInfo("Info");
+        watchForm.setModel("Model");
+        watchForm.setMovementName("Movement");
+        watchForm.setPrice(BigDecimal.valueOf(2345));
+        watchForm.setGenderName("Gender");
+        return watchForm;
     }
 
     @Test
@@ -171,22 +171,22 @@ public class ProductServiceImplTest {
         initDictionaryDaoMock();
         initWatchDaoMock();
         ProductService productServiceSpy = spy(productService);
-        WatchDto watchDto = createWatchDto();
-        Watch watch = DtoConverter.getWatch(watchDto);
+        WatchForm watchForm = createWatchDto();
+        Watch watch = DtoConverter.getWatch(watchForm);
         WatchImage watchImage = new WatchImage();
         watchImage.setId(346);
         when(imageServiceMock.getWatchImages(watch)).thenReturn(Arrays.asList(watchImage));
 
-        productServiceSpy.update(watchDto);
+        productServiceSpy.update(watchForm);
 
-        verify(imageServiceMock,times(1)).saveImageAndGetLink(watchDto.getMainImage());
-        verify(dictionaryDaoMock,times(1)).getProperty(Brand.class, watchDto.getBrandName());
-        verify(dictionaryDaoMock,times(1)).getProperty(Gender.class, watchDto.getGenderName());
-        verify(dictionaryDaoMock,times(1)).getProperty(Movement.class, watchDto.getMovementName());
-        verify(watchDaoMock,times(1)).update(DtoConverter.getWatch(watchDto));
+        verify(imageServiceMock,times(1)).saveImageAndGetLink(watchForm.getMainImage());
+        verify(dictionaryDaoMock,times(1)).getProperty(Brand.class, watchForm.getBrandName());
+        verify(dictionaryDaoMock,times(1)).getProperty(Gender.class, watchForm.getGenderName());
+        verify(dictionaryDaoMock,times(1)).getProperty(Movement.class, watchForm.getMovementName());
+        verify(watchDaoMock,times(1)).update(DtoConverter.getWatch(watchForm));
         verify(imageServiceMock,times(1)).getWatchImages(watch);
         verify(imageServiceMock,times(1)).deleteImage(watchImage);
-        verify(imageServiceMock,times(1)).saveImage(new ImageDto(watch.getId(),watchDto.getSmallImages().get(0)));
-        verify(imageServiceMock,times(1)).saveImage(new ImageDto(watch.getId(),watchDto.getSmallImages().get(0)));
+        verify(imageServiceMock,times(1)).saveImage(new ImageDto(watch.getId(), watchForm.getSmallImages().get(0)));
+        verify(imageServiceMock,times(1)).saveImage(new ImageDto(watch.getId(), watchForm.getSmallImages().get(0)));
     }
 }

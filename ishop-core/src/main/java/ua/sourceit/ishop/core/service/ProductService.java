@@ -1,7 +1,7 @@
 package ua.sourceit.ishop.core.service;
 
 import ua.sourceit.ishop.core.entity.Watch;
-import ua.sourceit.ishop.core.model.WatchDto;
+import ua.sourceit.ishop.core.model.WatchForm;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,10 +33,10 @@ public interface ProductService {
     /**
      *  Save new Watch
      *
-     * @param watchDto  watchDto object
+     * @param watchForm  watchForm object
      * @return   saved Watch object
      */
-    int save(WatchDto watchDto) throws IOException;
+    int save(WatchForm watchForm) throws IOException;
 
     /**
      * Delete watch by id
@@ -46,8 +46,8 @@ public interface ProductService {
     void delete(int productId);
 
     /**
-     * Update watchDto by id
-     * @param watchDto
+     * Update watchForm by id
+     * @param watchForm
      */
-    void update(WatchDto watchDto) throws IOException;
+    void update(WatchForm watchForm) throws IOException;
 }

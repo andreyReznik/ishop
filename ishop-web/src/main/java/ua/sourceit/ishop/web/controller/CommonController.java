@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.sourceit.ishop.core.entity.User;
 import ua.sourceit.ishop.core.entity.UserRole;
 import ua.sourceit.ishop.core.exception.UserWithThisEmailAlreadyExists;
-import ua.sourceit.ishop.core.model.UserDto;
+import ua.sourceit.ishop.core.model.UserForm;
 import ua.sourceit.ishop.core.service.UserService;
 import ua.sourceit.ishop.web.security.CurrentAccount;
 import ua.sourceit.ishop.web.security.SecurityUtils;
@@ -69,28 +69,28 @@ public class CommonController {
 
     @RequestMapping(value={"/register"})
     public String registerUser(ModelMap modelMap) {
-        UserDto userDto = new UserDto();
-        modelMap.addAttribute("user", userDto);
+        UserForm userForm = new UserForm();
+        modelMap.addAttribute("user", userForm);
         return "registration/registration";
     }
 
     @RequestMapping(value={"/registerHandle"})
-    public ModelAndView registerHandler(@ModelAttribute("user") @Valid UserDto userDto,
+    public ModelAndView registerHandler(@ModelAttribute("user") @Valid UserForm userForm,
                                   BindingResult result) {
-        if (!userDto.isPasswordsMatch()) {
+        if (!userForm.isPasswordsMatch()) {
             result.rejectValue("confirmPassword", "",null,"The password fields don't match.");
         }
         if (result.hasErrors()) {
-            return new ModelAndView("registration/registration", "user", userDto);
+            return new ModelAndView("registration/registration", "user", userForm);
         }
         try{
 
-            User iShopUser = userService.registerNewUser(userDto);
+            User iShopUser = userService.registerNewUser(userForm);
             SecurityUtils.authenticate(iShopUser);
             return new ModelAndView("registration/success-register", "name", iShopUser.getName());
         }catch (UserWithThisEmailAlreadyExists ex){
             result.rejectValue("email", "",null,ex.getMessage());
-            return new ModelAndView("registration/registration", "user", userDto);
+            return new ModelAndView("registration/registration", "user", userForm);
         }
     }
 
@@ -110,6 +110,4 @@ public class CommonController {
             LOGGER.error(e.getMessage(),e);
         }
     }
-
-
 }

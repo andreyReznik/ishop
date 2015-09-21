@@ -1,33 +1,29 @@
 package ua.sourceit.ishop.core.model.statistic;
 
+import java.util.List;
+
 /**
- * Statistic class witch represent client ip, site url and visiting count.
+ * Statistic class witch represent client ip, url and visiting count.
  * immutable
  * @author: areznik
  */
 
-public class VisitedResource {
+public class VisitedResource  {
 
     private String ip;
-    private String url;
-    private int count;
+    private List<VisitedUrl> visitedUrls;
 
-    public VisitedResource(String ip, String url, int count) {
+    public VisitedResource(String ip, List<VisitedUrl> visitedUrls) {
         this.ip = ip;
-        this.url = url;
-        this.count = count;
+        this.visitedUrls = visitedUrls;
     }
 
     public String getIp() {
         return ip;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public int getCount() {
-        return count;
+    public List<VisitedUrl> getVisitedUrls() {
+        return visitedUrls;
     }
 
     @Override
@@ -37,20 +33,13 @@ public class VisitedResource {
 
         VisitedResource that = (VisitedResource) o;
 
-        if (count != that.count) return false;
         if (!ip.equals(that.ip)) return false;
-        if (!url.equals(that.url)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = ip.hashCode();
-        result = 31 * result + url.hashCode();
-        result = 31 * result + count;
-        return result;
+        return ip.hashCode();
     }
-
-
 }

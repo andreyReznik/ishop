@@ -25941,7 +25941,7 @@ div.category-products {
     position: absolute;
     top: 0px;
     opacity: 1;
-    display: block;
+    display: none !important;
     border-radius: 9px;
     z-index: 99;
     right: 1px;

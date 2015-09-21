@@ -10,5 +10,5 @@
     </div>
 </div>
 <div id="tcapiScModal" class="jom-popup mfp-hide"></div>
-<script type="text/javascript" src="${ctx}/js/shopBag.js"></script>
+<script type="text/javascript" src="${contextPath}/js/shopBag.js"></script>
 

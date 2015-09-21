@@ -9,7 +9,7 @@ import java.util.List;
  * @author: areznik
  */
 
-public class WatchDto {
+public class WatchForm {
 
     private int id;
 
