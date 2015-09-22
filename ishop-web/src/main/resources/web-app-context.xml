@@ -1,0 +1,78 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:security="http://www.springframework.org/schema/security"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <import resource="core-app-context.xml" />
+
+    <context:component-scan base-package="ua.sourceit.ishop.web.controller"/>
+    <context:component-scan base-package="ua.sourceit.ishop.web.filter"/>
+    <context:component-scan base-package="ua.sourceit.ishop.web.security"/>
+
+
+    <mvc:annotation-driven />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    </bean>
+
+    <!--Spring security-->
+    <security:http use-expressions="true" auto-config="true" >
+        <security:intercept-url pattern="/product/order/**"	    access="hasAnyRole('USER','ADMIN')" />
+        <security:intercept-url pattern="/admin/**" 			access="hasRole('ADMIN')" />
+        <security:intercept-url pattern="/**" 					access="permitAll" />
+        <security:form-login
+                login-page="/login"
+                authentication-failure-url="/loginFailed"
+                default-target-url="/myInfo"
+                login-processing-url="/loginHandler"
+                username-parameter="username"
+                password-parameter="password"/>
+        <security:logout
+                logout-success-url="/login"
+                invalidate-session="true"
+                delete-cookies="JSESSIONID"
+                logout-url="/logout" />
+        <security:remember-me
+                key="iShopRememberMeKey"
+                remember-me-parameter="remember-me"
+                token-repository-ref="tokenRepository"
+                token-validity-seconds="1209600"/>
+
+        <security:session-management session-fixation-protection="migrateSession"
+                                     invalid-session-url="/product/all">
+            <security:concurrency-control
+                    max-sessions="1"
+                    expired-url="/sessionExpired" />
+        </security:session-management>
+
+    </security:http>
+
+    <bean id="simpleUrlAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+        <property name="defaultTargetUrl" value="/myInfo"/>
+        <property name="targetUrlParameter" value="url"/>
+        <property name="alwaysUseDefaultTargetUrl" value="false" />
+        <property name="useReferer" value="true" />
+
+    </bean>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userAuthenticationService" >
+
+            <security:password-encoder ref="pwdEncoder" />
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="tokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/decorators">
+    <decorator name="empty-template" page="empty-template.jsp">
+        <pattern>/product/ajax/*</pattern>
+        <pattern>/admin/ajax/*</pattern>
+    </decorator>
+
+    <decorator name="admin-template" page="admin-template.jsp">
+        <pattern>/admin*</pattern>
+    </decorator>
+
+    <decorator name="basic-theme" page="basic-template.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>
