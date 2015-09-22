@@ -84,19 +84,23 @@ public class ApiController {
         return watch;
     }
 
-    @ApiOperation(value = "Get visiting statistic by date",notes = "date should be as YYYYMMDD", responseClass = "VisitedResource")
+    @ApiOperation(value = "Get visiting statistic by date",notes = "date should be as YYYYMMDD",
+                  responseClass = "VisitedResource")
     @ApiErrors(errors = {
-            @ApiError(code = HttpServletResponse.SC_OK,             	   reason = "Request successful"),
-            @ApiError(code = HttpServletResponse.SC_BAD_REQUEST,           reason = "invalid parameters"),
-            @ApiError(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, reason = "Interval server error")
+            @ApiError(code = HttpServletResponse.SC_OK,
+                      reason = "Request successful"),
+            @ApiError(code = HttpServletResponse.SC_BAD_REQUEST,
+                      reason = "invalid parameters"),
+            @ApiError(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                      reason = "Interval server error")
     })
     @ApiModel(type = VisitedResource.class)
     @RequestMapping(value = "/stats", method = RequestMethod.GET)
     public @ResponseBody
-    Set<VisitedResource> getProduct(@ApiParam(value = "date", required=true)
+    Set<VisitedResource> getStats(@ApiParam(value = "date", required=true)
                                     @RequestParam(value = "date", required = true)
-                                    String dateAsYyyyMmDd) throws ParseException {
-        Date dateFromYyyyMMdd = DateUtil.getDateFromYyyyMMdd(dateAsYyyyMmDd);
+                                    String date) throws ParseException {
+        Date dateFromYyyyMMdd = DateUtil.getDateFromYyyyMMdd(date);
         return statisticService.getVisitingStatistic(dateFromYyyyMMdd);
     }
 

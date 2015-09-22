@@ -38,11 +38,10 @@ public class StatisticServiceImplTest {
 
     @Test
     public void testSaveUserVisitedDataWhenParamsValid() throws Exception {
-
         String ip = "52.17.236.173";
         String url = "product/order/create";
-
         VisitedItem visitedItem = new VisitedItem(ip, url);
+
         statisticService.saveUserVisitedDataAsync(visitedItem);
 
         Field field = statisticService.getClass().getDeclaredField("executorService");
